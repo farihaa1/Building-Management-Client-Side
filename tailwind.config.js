@@ -6,7 +6,9 @@ export default {
   ],
   theme: {
     extend: {
-      
+      colors: {
+        blue: '#6C60FE',
+      },
     },
   },
   plugins: [

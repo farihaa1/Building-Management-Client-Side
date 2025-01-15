@@ -39,9 +39,10 @@ const Login = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div style={{}} className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex flex-col items-center justify-center">
         <div className="text-center max-w-lg">
+         
           <h1 className="text-5xl font-bold">Login now!</h1>
           <p className="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
@@ -75,15 +76,15 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
+            <div className="form-control flex items-center">
+              <label className="label text-center text-gray-200 mb-2">
                 <LoadCanvasTemplate />
               </label>
               <input
                 type="text"
                 name="captcha"
                 placeholder="Type the text above"
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 ref={captchaRef}
                 onBlur={validateUserCaptcha} 
                 required
