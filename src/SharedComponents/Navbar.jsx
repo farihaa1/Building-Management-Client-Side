@@ -76,7 +76,7 @@ const Navbar = () => {
               src="/logo/apartment.svg"
               alt="Apartment Logo"
             />
-            ApartmentBS
+            Harmony Heights
           </Link>
         </div>
 
@@ -133,8 +133,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="navbar-center hidden lg:flex py-2 pb-6">
-        <ul className="menu-horizontal px-1 gap-4">{Links}</ul>
+      <div className="navbar-center hidden lg:flex items-center justify-center py-1 text-xl pb-6">
+        <ul className="menu-horizontal px-1 gap-4 justify-center items-center">{Links}</ul>
       </div>
     </motion.div>
   );
