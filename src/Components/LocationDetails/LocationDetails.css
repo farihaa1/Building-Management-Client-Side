@@ -1,0 +1,14 @@
+.location-details .directions-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .location-details .directions-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .location-details .map-container {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
