@@ -4,6 +4,7 @@ import ErrorPage from "../SharedComponents/ErrorPage";
 import HomePage from "../Pages/Home/HomePage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Apartment from "../Pages/Apartment/Apartment";
 
 const Routes = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const Routes = createBrowserRouter([
         },
         {
             path:'/apartment',
-            element: <HomePage></HomePage>,
+            element: <Apartment></Apartment>,
         },
         {
             path:'/sign-in',
