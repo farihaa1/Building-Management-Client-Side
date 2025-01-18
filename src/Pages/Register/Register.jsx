@@ -18,13 +18,19 @@ const Register = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
-      updateUserProfile(data.name, data.photoURL).then(() => {
-        const userInfo = {
-          name: data.name,
-          email: data.email,
-        };
-        
-      });
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Registered successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        })
+        .catch((error) => console.log(error));
     });
   };
   return (

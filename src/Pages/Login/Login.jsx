@@ -41,7 +41,7 @@ const Login = () => {
       const user = result.user;
       console.log(user);
       Swal.fire({
-        title: "User Login Successful.",
+        title: "User signed in Successfully.",
         showClass: {
           popup: "animate__animated animate__fadeInDown",
         },
@@ -111,7 +111,7 @@ const Login = () => {
               </div>
               <div className="form-control mt-6">
                 <input
-                  disabled={true}
+                  disabled={disabled}
                   className="btn btn-primary"
                   type="submit"
                   value="Login"
