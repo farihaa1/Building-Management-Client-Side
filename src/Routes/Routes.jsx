@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import Apartment from "../Pages/Apartment/Apartment";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyProfile from "../Pages/MyProfile/MyProfile";
+import Announcements from "../Pages/Announcements/Announcements";
 
 const Routes = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const Routes = createBrowserRouter([
         {
             path:"/user-dashboard/my-profile",
             element:<MyProfile></MyProfile>,
+        },
+        {
+            path:"/user-dashboard/announcements",
+            element:<Announcements></Announcements>,
         },
     ]
   }

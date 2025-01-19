@@ -9,10 +9,10 @@ const DashboardLayout = () => {
         <header>header</header>
       </div>
       <div className="flex gap-4 w-full mx-auto">
-        <div className="w-[35%] bg-blue min-h-screen rounded-xl p-4 lg:p-8">
+        <div className="w-[30%] bg-blue min-h-screen rounded-xl p-4 lg:p-8">
           <UserNavbar></UserNavbar>
         </div>
-        <div className="w-[65%] ">
+        <div className="w-[70%] ">
           <Outlet></Outlet>
         </div>
       </div>
