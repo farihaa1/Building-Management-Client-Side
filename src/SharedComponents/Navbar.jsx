@@ -57,6 +57,18 @@ const Navbar = () => {
           Apartment
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/user-dashboard/my-profile"
+          className={({ isActive }) =>
+            `px-4 py-2 rounded-lg ${
+              isActive ? "bg-btn1 text-white font-semibold" : "text-gray-500"
+            }`
+          }
+        >
+         Dashboard
+        </NavLink>
+      </li>
     </>
   );
 

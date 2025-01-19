@@ -5,6 +5,8 @@ import HomePage from "../Pages/Home/HomePage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Apartment from "../Pages/Apartment/Apartment";
+import DashboardLayout from "../Layout/DashboardLayout";
+import MyProfile from "../Pages/MyProfile/MyProfile";
 
 const Routes = createBrowserRouter([
   {
@@ -30,6 +32,16 @@ const Routes = createBrowserRouter([
         },
     ]
   },
+  {
+    path: "/user-dashboard",
+    element:<DashboardLayout></DashboardLayout>,
+    children:[
+        {
+            path:"/user-dashboard/my-profile",
+            element:<MyProfile></MyProfile>,
+        },
+    ]
+  }
 ]);
 
 export default Routes;
