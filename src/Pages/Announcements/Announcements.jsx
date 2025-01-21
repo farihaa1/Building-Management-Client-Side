@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import Welcome from "../../Components/Welcome/Welcome";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../Components/Loader";
 
 const Announcements = () => {
-  const [announcements, setAnnouncements] = useState([]);
+  const { data: announcements = [], isLoading, isError } = useQuery({
+    queryKey: ["announcements"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/announcements");
+      return res.json();
+    },
+  });
 
-  useEffect(() => {
-    fetch("http://localhost:5000/announcements")
-      .then((res) => res.json())
-      .then((data) => setAnnouncements(data));
-  }, []);
+  if (isLoading) return <Loader></Loader>;
+  if (isError) return <p>Failed to load announcements.</p>;
 
   return (
     <div className="p-4">
-      <Welcome></Welcome>
       <div className="pt-12">
         <h3 className="text-4xl font-bold text-gray-700">Announcements</h3>
         <div className="grid grid-cols-2 w-full gap-6 pt-8">
