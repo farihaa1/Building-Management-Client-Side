@@ -8,6 +8,8 @@ import Apartment from "../Pages/Apartment/Apartment";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyProfile from "../Pages/MyProfile/MyProfile";
 import Announcements from "../Pages/Announcements/Announcements";
+import MemberDashboardLayout from "../Layout/MemberDashboardLayou";
+import AdminDashboard from "../Layout/AdminDashboard";
 
 const Routes = createBrowserRouter([
   {
@@ -46,7 +48,32 @@ const Routes = createBrowserRouter([
             element:<Announcements></Announcements>,
         },
     ]
-  }
+  },
+  {
+    path: "/member-dashboard",
+    element:<MemberDashboardLayout></MemberDashboardLayout>,
+    children:[
+        {
+            path:"/member-dashboard/my-profile",
+            element:<MyProfile></MyProfile>,
+        },
+        {
+            path:"/member-dashboard/announcements",
+            element:<Announcements></Announcements>,
+        },
+    ]
+  },
+  {
+    path: "/admin",
+    element:<AdminDashboard></AdminDashboard> ,
+    children:[
+        {
+            path:"my-profile",
+            element:<MyProfile></MyProfile>,
+        },
+       
+    ]
+  },
 ]);
 
 export default Routes;

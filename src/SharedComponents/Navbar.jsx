@@ -69,6 +69,19 @@ const Navbar = () => {
          Dashboard
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/member-dashboard"
+          className={({ isActive }) =>
+            `px-4 py-2 rounded-lg ${
+              isActive ? "bg-btn1 text-white font-semibold" : "text-gray-500"
+            }`
+          }
+        >
+         member Dashboard
+        </NavLink>
+      </li>
+      
     </>
   );
 

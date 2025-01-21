@@ -1,10 +1,57 @@
 import { useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Apartment = () => {
   const [apartments, setApartments] = useState([]);
+  const { user } = useAuth();
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
+
+  const handleApply = (item) => {
+    if (user && user.email) {
+      const applyItem = {
+        apartmentId:_id,
+        email: user.email,
+        name: user.displayName,
+        image,
+        price
+      };
+      axios.post('http://localhost:5000/apply', applyItem)
+      .then(res=>{
+        if(res.data.insertedId){
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `Apartment ${item.apartmentNo} added`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/sign-in", { state: { from: location } });
+        }
+        
+      });
+    }
+  };
+
+
 
   useEffect(() => {
     fetch(
@@ -12,7 +59,6 @@ const Apartment = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-      
         setCount(data.count);
         setApartments(data.apartments);
       });
@@ -68,14 +114,16 @@ const Apartment = () => {
                     Rent: <strong>${apartment.rent}</strong>/month
                   </p>
                   <div className="card-actions justify-start">
-                    <button className="btn btn-primary">
+                    <button
+                      onClick={() => handleApply(apartment)}
+                      className="btn btn-primary"
+                    >
                       {apartment.agreementButton}
                     </button>
                   </div>
                 </div>
               </div>
-            ))
-         }
+            ))}
         </div>
       </div>
       <div className="flex justify-center mt-4">
@@ -86,7 +134,7 @@ const Apartment = () => {
         >
           Previous
         </button>
-       
+
         {[...Array(numberOfPages)].map((_, index) => (
           <button
             key={index}
