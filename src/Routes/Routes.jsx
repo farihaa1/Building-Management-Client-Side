@@ -8,71 +8,50 @@ import Apartment from "../Pages/Apartment/Apartment";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyProfile from "../Pages/MyProfile/MyProfile";
 import Announcements from "../Pages/Announcements/Announcements";
-import MemberDashboardLayout from "../Layout/MemberDashboardLayou";
-import AdminDashboard from "../Layout/AdminDashboard";
+import AdminProfile from "../Pages/Dashboard/AdminProfile";
 
 const Routes = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout/>,
+    element: <MainLayout />,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
-        {
-            path:'/',
-            element: <HomePage></HomePage>,
-        },
-        {
-            path:'/apartment',
-            element: <Apartment></Apartment>,
-        },
-        {
-            path:'/sign-in',
-            element: <Login></Login>,
-        },
-        {
-            path:'/register',
-            element: <Register></Register>,
-        },
-    ]
+      {
+        path: "/",
+        element: <HomePage></HomePage>,
+      },
+      {
+        path: "/apartment",
+        element: <Apartment></Apartment>,
+      },
+      {
+        path: "/sign-in",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
   },
   {
-    path: "/user-dashboard",
-    element:<DashboardLayout></DashboardLayout>,
-    children:[
-        {
-            path:"/user-dashboard/my-profile",
-            element:<MyProfile></MyProfile>,
-        },
-        {
-            path:"/user-dashboard/announcements",
-            element:<Announcements></Announcements>,
-        },
-    ]
-  },
-  {
-    path: "/member-dashboard",
-    element:<MemberDashboardLayout></MemberDashboardLayout>,
-    children:[
-        {
-            path:"/member-dashboard/my-profile",
-            element:<MyProfile></MyProfile>,
-        },
-        {
-            path:"/member-dashboard/announcements",
-            element:<Announcements></Announcements>,
-        },
-    ]
-  },
-  {
-    path: "/admin",
-    element:<AdminDashboard></AdminDashboard> ,
-    children:[
-        {
-            path:"my-profile",
-            element:<MyProfile></MyProfile>,
-        },
-       
-    ]
+    path: "dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: "my-profile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "announcements",
+        element: <Announcements></Announcements>,
+      },
+      //   admin routes
+      {
+        path: "admin-profile",
+        element: <AdminProfile></AdminProfile>,
+      },
+    ],
   },
 ]);
 

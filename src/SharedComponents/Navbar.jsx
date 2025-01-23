@@ -59,7 +59,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/user-dashboard/my-profile"
+          to="/dashboard"
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
               isActive ? "bg-btn1 text-white font-semibold" : "text-gray-500"

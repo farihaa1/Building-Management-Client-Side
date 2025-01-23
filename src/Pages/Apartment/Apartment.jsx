@@ -1,134 +1,151 @@
-import React, { useState } from "react";
-import Swal from "sweetalert2";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAuth from "../../Hooks/useAuth";
-import useApartments from "../../Hooks/useApartment";
+import Swal from "sweetalert2";
 import Loader from "../../Components/Loader";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useApartments from "../../Hooks/useApartment";
 
 const Apartment = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
-  const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
-  const { data, isLoading, isError } = useApartments(currentPage, itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage] = useState(6);
+  const [minRent, setMinRent] = useState(0);
+  const [maxRent, setMaxRent] = useState(Infinity);
 
-  const handleApply = (apartment) => {
-    if (user?.email) {
-      const applyItem = {
-        apartmentId: apartment._id,
-        email: user.email,
-        name: user.displayName,
-        image: apartment.image,
-        floorNo: apartment.floorNo,
-        status: "pending",
-        blockName: apartment.blockName,
-        rent: apartment.rent,
-      };
+  const { data, isLoading, isError } = useApartments(
+    currentPage,
+    itemsPerPage,
+    minRent,
+    maxRent
+  );
 
-      axiosSecure
-        .post("/apply", applyItem)
-        .then((res) => {
-          if (res.data.insertedId) {
-            Swal.fire({
-              position: "top-center",
-              icon: "success",
-              title: `Apartment ${apartment.apartmentNo} added`,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-        })
-        .catch((err) => console.error(err));
-    } else {
-      Swal.fire({
-        title: "You are not logged in",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, login!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/sign-in");
-        }
-      });
-    }
-  };
+  if (isLoading) return <Loader />;
+  if (isError) return <div>Error loading apartments.</div>;
 
-  if (isLoading) return <Loader></Loader>;
-  if (isError) return <p>Something went wrong!</p>;
-
-  const { apartments, count } = data || {};
+  const { apartments = [], count } = data || {};
   const numberOfPages = Math.ceil(count / itemsPerPage);
 
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    const min = e.form.target.min.value;
+    const max = e.form.target.max.value;
+    setMaxRent(parseInt(max))
+    setMinRent(parseInt(min))
+  }
+
+
+  const handleApply = (apartment) => {
+    if (!user?.email) {
+      Swal.fire({
+        title: "Not Logged In",
+        text: "You need to log in to apply for an apartment.",
+        icon: "warning",
+        confirmButtonText: "Login",
+      }).then(() => navigate("/sign-in"));
+      return;
+    }
+
+    const applyItem = {
+      apartmentId: apartment._id,
+      email: user.email,
+      name: user.displayName,
+      floorNo: apartment.floorNo,
+      blockName: apartment.blockName,
+      apartmentNo: apartment.apartmentNo,
+      rent: apartment.rent,
+    };
+
+    axiosSecure
+      .post("/apply", applyItem)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire(
+            "Success",
+            "Your application has been submitted!",
+            "success"
+          );
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
-    <div className="container mx-auto py-8">
-      <div className="text-center mb-6">
-        <h2 className="text-3xl font-bold">Apartments</h2>
-        <p className="text-gray-600">Find your dream apartment today!</p>
+    <div className="container mx-auto">
+      <h2 className="text-3xl font-bold mb-4">Available Apartments</h2>
+
+    
+      <div className="flex justify-between items-center mb-6">
+        <form onSubmit={handleSubmit}  className="flex gap-2">
+          <input
+            type="number"
+            placeholder="Min Rent"
+            className="input input-bordered"
+           name="min"
+          />
+          <input
+            type="number"
+            placeholder="Max Rent"
+            className="input input-bordered"
+           name="max"
+          />
+        </form>
       </div>
+
+   
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {apartments.map((apartment) => (
-          <div
-            key={apartment._id}
-            className="card card-compact bg-base-100 w-full shadow-xl"
-          >
-            <figure>
-              <img
-                src={apartment.image}
-                alt={`Apartment ${apartment.apartmentNo}`}
-                className="h-56 w-full object-cover"
-              />
-            </figure>
+          <div key={apartment._id} className="card shadow-lg">
+            <img
+              src={apartment.image}
+              alt={`Apartment ${apartment.apartmentNo}`}
+              className="w-full h-48 object-cover"
+            />
             <div className="card-body">
-              <h2 className="card-title">Apartment {apartment.apartmentNo}</h2>
-              <p>
-                Block: <strong>{apartment.blockName}</strong> | Floor:{" "}
-                <strong>{apartment.floorNo}</strong>
-              </p>
-              <p>
-                Rent: <strong>${apartment.rent}</strong>/month
-              </p>
-              <div className="card-actions justify-start">
-                <button
-                  onClick={() => handleApply(apartment)}
-                  className="btn btn-primary"
-                >
-                  Apply Now
-                </button>
-              </div>
+              <h3 className="card-title">Apartment {apartment.apartmentNo}</h3>
+              <p>Floor: {apartment.floorNo}</p>
+              <p>Block: {apartment.blockName}</p>
+              <p>Rent: ${apartment.rent}</p>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleApply(apartment)}
+              >
+                Apply Now
+              </button>
             </div>
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-4">
+
+      {/* Pagination controls */}
+      <div className="flex justify-center mt-6">
         <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-          disabled={currentPage === 0}
           className="btn btn-secondary"
+          onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
+          disabled={currentPage === 0}
         >
           Previous
         </button>
-        {[...Array(numberOfPages)].map((_, index) => (
+        {[...Array(numberOfPages)].map((_, idx) => (
           <button
-            key={index}
-            onClick={() => setCurrentPage(index)}
+            key={idx}
             className={`btn ${
-              currentPage === index ? "btn-primary" : "btn-outline"
+              currentPage === idx ? "btn-primary" : "btn-outline"
             }`}
+            onClick={() => setCurrentPage(idx)}
           >
-            {index + 1}
+            {idx + 1}
           </button>
         ))}
         <button
+          className="btn btn-secondary"
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, numberOfPages - 1))
           }
           disabled={currentPage === numberOfPages - 1}
-          className="btn btn-secondary"
         >
           Next
         </button>
