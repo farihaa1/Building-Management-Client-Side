@@ -3,6 +3,7 @@ import { FaBars } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,10 +16,22 @@ const Navbar = () => {
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
 
   const handleSignOut = () => {
-    logout()
-      .then(() => console.log("Successfully signed out"))
-      .catch((err) => console.error(err));
+    Swal.fire({
+      title: "Are you sure you want to sign out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout()
+          .then(() => Swal.fire("Logged Out", "You have been logged out", "success"))
+          .catch((err) => console.error(err));
+      }
+    });
   };
+  
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -66,7 +79,7 @@ const Navbar = () => {
             }`
           }
         >
-         Dashboard
+          Dashboard
         </NavLink>
       </li>
       <li>
@@ -78,10 +91,9 @@ const Navbar = () => {
             }`
           }
         >
-         member Dashboard
+          member Dashboard
         </NavLink>
       </li>
-      
     </>
   );
 
@@ -120,21 +132,30 @@ const Navbar = () => {
                 onClick={toggleProfile}
                 className="rounded-full w-10 h-10 md:w-12 md:h-12 cursor-pointer"
               >
-                <img
-                  className="w-full h-full object-cover rounded-full"
-                  src={
-                    user?.photoURL ||
-                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  }
-                  alt="Profile"
-                  title={user.displayName}
-                />
+                {user.photoURL ? (
+                  <img
+                    className="w-full h-full object-cover rounded-full"
+                    src={user.photoURL}
+                    alt="Profile"
+                    title={user.displayName}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-full">
+                    <h4 className="text-lg text-white font-semibold">
+                      {user.displayName?.slice(0, 1) || "?"}
+                    </h4>
+                  </div>
+                )}
               </div>
               {isProfileOpen && (
                 <div className="absolute top-14 w-72 py-4 rounded-xl right-0 bg-white px-6 shadow-md z-10">
                   <ul className="menu-vertical p-2 space-y-2 text-gray-600">
-                    <li className="py-1 pl-2">{user?.displayName || "No Name"}</li>
-                    <li className="py-1 pl-2">{user?.email || "No Email"}</li>
+                    <li className="py-1 pl-2">
+                      {user?.displayName || "Guest User"}
+                    </li>
+                    <li className="py-1 pl-2">
+                      {user?.email || "guest@example.com"}
+                    </li>
                     <li className="divider pb-1"></li>
                     <button
                       onClick={handleSignOut}

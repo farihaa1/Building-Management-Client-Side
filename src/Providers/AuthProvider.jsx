@@ -7,7 +7,7 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   updateProfile,
-  sendPasswordResetEmail,
+  deleteUser,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 
@@ -19,7 +19,7 @@ const AuthProviders = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -36,12 +36,18 @@ const AuthProviders = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
-  
-const updateUserProfile = (name, photo)=>{
-  return updateProfile(auth.currentUser, {
-    displayName: name, photoURL: photo
-  })
-}
+
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+  const firebaseDeleteUser = (user) => {
+    return deleteUser(auth.currentUser).then(() => {
+      return true;
+    });
+  };
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
@@ -60,7 +66,8 @@ const updateUserProfile = (name, photo)=>{
     logout,
     setLoading,
     handleGoogleLogin,
-    updateUserProfile
+    updateUserProfile,
+    firebaseDeleteUser,
   };
 
   return (

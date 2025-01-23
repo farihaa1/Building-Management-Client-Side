@@ -1,4 +1,5 @@
 import React from "react";
+import { FaHome } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 
 const DashboardNavbar = () => {
@@ -33,6 +34,24 @@ const DashboardNavbar = () => {
           Manage Coupons
         </Link>
       </li>
+      <li>
+        <Link to="all-users" className="text-blue-500 hover:underline">
+         All Users
+        </Link>
+      </li>
+    </>
+  );
+
+ 
+  const CommonLinks = () => (
+    <>
+      <li>
+        <Link to="/" className="text-blue-500 hover:underline">
+        <FaHome></FaHome>
+          Home
+        </Link>
+      </li>
+     
     </>
   );
 
@@ -40,7 +59,7 @@ const DashboardNavbar = () => {
     <>
       <li>
         <NavLink
-          to="/user-dashboard/my-profile"
+          to="user-profile"
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
               isActive ? "bg-active text-white font-semibold" : "text-gray-500"
@@ -52,7 +71,7 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/user-dashboard/announcements"
+          to="announcements"
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
               isActive ? "bg-btn1 text-white font-semibold" : "text-gray-500"
@@ -69,7 +88,7 @@ const DashboardNavbar = () => {
     <>
       <li>
         <NavLink
-          to="/member-dashboard/my-profile"
+          to="member-profile"
           className={({ isActive }) =>
             isActive
               ? "text-blue-700 font-semibold"
@@ -81,7 +100,7 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/member-dashboard/make-payment"
+          to="make-payment"
           className={({ isActive }) =>
             isActive
               ? "text-blue-700 font-semibold"
@@ -93,7 +112,7 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/member-dashboard/payment-history"
+          to="payment-history"
           className={({ isActive }) =>
             isActive
               ? "text-blue-700 font-semibold"
@@ -105,7 +124,7 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/member-dashboard/announcements"
+          to="announcements"
           className={({ isActive }) =>
             isActive
               ? "text-blue-700 font-semibold"
