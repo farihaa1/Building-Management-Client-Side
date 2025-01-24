@@ -1,6 +1,10 @@
 import React from "react";
+import useAuth from "../../../Hooks/useAuth";
 
 const AdminProfile = () => {
+  const {user} = useAuth() ;
+
+  
   // Replace with actual data fetched from backend
   const profileData = {
     name: "Admin Name",

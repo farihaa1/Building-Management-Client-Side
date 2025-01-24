@@ -14,6 +14,8 @@ import AgreementRequests from "../Pages/Dashboard/AdminDashboard/AgreementReques
 import MakeAnnouncement from "../Pages/Dashboard/AdminDashboard/MakeAnnouncement";
 import ManageMembers from "../Pages/Dashboard/AdminDashboard/ManageMembers";
 import AllUsers from "../Pages/Dashboard/AdminDashboard/AllUsers";
+import PrivateRoutes from "./PrivateRoutes";
+import AdminRoutes from "./AdminRoutes";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -40,7 +42,11 @@ const Routes = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "my-profile",
@@ -53,15 +59,15 @@ const Routes = createBrowserRouter([
       //   admin routes
       {
         path: "admin-profile",
-        element: <AdminProfile></AdminProfile> ,
+        element: <AdminProfile></AdminProfile>,
       },
       {
         path: "manage-coupons",
-        element: <ManageCoupons></ManageCoupons>
+        element: <ManageCoupons></ManageCoupons>,
       },
       {
         path: "manage-members",
-        element:<ManageMembers></ManageMembers>,
+        element: <ManageMembers></ManageMembers>,
       },
       {
         path: "make-announcement",
@@ -73,7 +79,11 @@ const Routes = createBrowserRouter([
       },
       {
         path: "all-users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoutes>
+            <AllUsers></AllUsers>
+          </AdminRoutes>
+        ),
       },
     ],
   },

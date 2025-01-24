@@ -1,36 +1,62 @@
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MakeAnnouncement = () => {
-  const [announcement, setAnnouncement] = useState({ title: "", description: "" });
+  const axiosPublic = useAxiosPublic();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Submit the announcement to the backend
-    console.log("Announcement Submitted: ", announcement);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    axiosPublic.post("/announcement", data).then((res) => {
+      if (res.data.insertedId) {
+        console.log("Announcement added to the database");
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Announcement created successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-6">Make Announcement</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block mb-2">Title:</label>
           <input
             type="text"
             className="border w-full p-2"
-            value={announcement.title}
-            onChange={(e) => setAnnouncement({ ...announcement, title: e.target.value })}
+            {...register("title", { required: "Title is required" })}
           />
+          {errors.title && (
+            <span className="text-red-500">{errors.title.message}</span>
+          )}
         </div>
         <div className="mb-4">
           <label className="block mb-2">Description:</label>
           <textarea
             className="border w-full p-2"
-            value={announcement.description}
-            onChange={(e) => setAnnouncement({ ...announcement, description: e.target.value })}
+            {...register("description", {
+              required: "Description is required",
+            })}
           />
+          {errors.description && (
+            <span className="text-red-500">{errors.description.message}</span>
+          )}
         </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2">
+        <button type="submit" className=" text-white px-4 py-2 bg-red-500">
           Submit
         </button>
       </form>

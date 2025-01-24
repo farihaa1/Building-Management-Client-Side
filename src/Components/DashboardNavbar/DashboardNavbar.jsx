@@ -1,9 +1,11 @@
 import React from "react";
 import { FaHome } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import useAdmin from "../../Hooks/useAdmin";
 
 const DashboardNavbar = () => {
-  const isAdmin = true;
+ 
+  const [isAdmin] = useAdmin();
   const isUser = false;
   const isMember = false;
 
@@ -36,22 +38,20 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <Link to="all-users" className="text-blue-500 hover:underline">
-         All Users
+          All Users
         </Link>
       </li>
     </>
   );
 
- 
   const CommonLinks = () => (
     <>
       <li>
         <Link to="/" className="text-blue-500 hover:underline">
-        <FaHome></FaHome>
+          <FaHome></FaHome>
           Home
         </Link>
       </li>
-     
     </>
   );
 

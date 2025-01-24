@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import {
+  getAuth,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+} from "firebase/auth";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,10 +17,11 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
+      console.log(res, "res");
       return res.data;
     },
   });
-
+  
   const handleMakeAdmin = (user) => {
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
       console.log(res.data);
@@ -34,44 +40,62 @@ const AllUsers = () => {
 
   const handleDeleteUser = (user) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: "Please reauthenticate",
+      input: "password",
+      inputLabel: "Enter your password to confirm deletion",
+      inputPlaceholder: "Password",
+      inputAttributes: {
+        type: "password",
+        required: true,
+      },
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/users/${user._id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            if (user?.email) {
-              firebaseDeleteUser(user)
-                .then(() => {
-                  refetch();
-                  Swal.fire({
-                    title: "Deleted!",
-                    text: `${user.email} has been deleted from Firebase.`,
-                    icon: "success",
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+        const credential = EmailAuthProvider.credential(
+          currentUser.email,
+          result.value
+        );
+
+        reauthenticateWithCredential(currentUser, credential)
+          .then(() => {
+            axiosSecure.delete(`/users/${user._id}`).then((res) => {
+              if (res.data.deletedCount > 0) {
+                firebaseDeleteUser(user)
+                  .then(() => {
+                    refetch();
+                    Swal.fire({
+                      title: "Deleted!",
+                      text: `${user.email} has been deleted.`,
+                      icon: "success",
+                    });
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                    Swal.fire(
+                      "Error",
+                      `Error deleting user: ${error.message}`,
+                      "error"
+                    );
                   });
-                })
-                .catch((error) => {
-                  console.error(error);
-                  Swal.fire(
-                    "Error",
-                    `Error deleting user from Firebase: ${error.message}`,
-                    "error"
-                  );
-                });
-            }
-          } else {
+              } else {
+                Swal.fire(
+                  "Error",
+                  "Failed to delete the user from the database",
+                  "error"
+                );
+              }
+            });
+          })
+          .catch((error) => {
+            console.error(error);
             Swal.fire(
-              "Error",
-              "Failed to delete the user from the database",
+              "Reauthentication Failed",
+              "Please ensure your password is correct.",
               "error"
             );
-          }
-        });
+          });
       }
     });
   };
@@ -84,13 +108,12 @@ const AllUsers = () => {
       </div>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
-          {/* head */}
           <thead>
             <tr>
               <th></th>
               <th>Name</th>
               <th>Email</th>
-              <th>Role</th>
+              <th className="text-center">Role</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -100,7 +123,7 @@ const AllUsers = () => {
                 <th>{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>
+                <td className="text-center">
                   {user.role === "admin" ? (
                     "Admin"
                   ) : (
@@ -108,12 +131,12 @@ const AllUsers = () => {
                       onClick={() => handleMakeAdmin(user)}
                       className="btn btn-md bg-orange-500"
                     >
-                      <h4
+                      <h2
                         className="text-white 
-                                        text-xl"
+                                        text-lg"
                       >
                         Make Admin
-                      </h4>
+                      </h2>
                     </button>
                   )}
                 </td>
@@ -122,7 +145,7 @@ const AllUsers = () => {
                     onClick={() => handleDeleteUser(user)}
                     className="btn btn-ghost btn-lg"
                   >
-                    <FaTrashAlt className="text-red-600"></FaTrashAlt>
+                    <FaTrashAlt className="text-red-600" />
                   </button>
                 </td>
               </tr>

@@ -4,11 +4,15 @@ import { Link, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import Loader from "../Components/Loader";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, loading } = useContext(AuthContext);
+  if (loading) {
+    return <Loader></Loader>;
+  }
 
   const profileRef = useRef(null);
 
@@ -26,12 +30,13 @@ const Navbar = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         logout()
-          .then(() => Swal.fire("Logged Out", "You have been logged out", "success"))
+          .then(() =>
+            Swal.fire("Logged Out", "You have been logged out", "success")
+          )
           .catch((err) => console.error(err));
       }
     });
   };
-  
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -127,22 +132,22 @@ const Navbar = () => {
         {/* Navbar End */}
         <div className="navbar-end flex items-center">
           {user ? (
-            <div className="relative" ref={profileRef}>
+            <div className="relative">
               <div
                 onClick={toggleProfile}
                 className="rounded-full w-10 h-10 md:w-12 md:h-12 cursor-pointer"
               >
                 {user.photoURL ? (
                   <img
-                    className="w-full h-full object-cover rounded-full"
+                    className="w-full h-full object-cover rounded-full bg-green-500"
                     src={user.photoURL}
                     alt="Profile"
                     title={user.displayName}
                   />
                 ) : (
-                  <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-full">
+                  <div className="w-full h-full bg-green-500 flex items-center justify-center rounded-full">
                     <h4 className="text-lg text-white font-semibold">
-                      {user.displayName?.slice(0, 1) || "?"}
+                      {user.displayName?.slice(0, 1)}
                     </h4>
                   </div>
                 )}
