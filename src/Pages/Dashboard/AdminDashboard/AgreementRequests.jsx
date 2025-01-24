@@ -1,26 +1,41 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loader from "../../../Components/Loader";
 
 const AgreementRequests = () => {
-  const requests = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      floor: "3",
-      block: "A",
-      room: "305",
-      rent: "$500",
-      date: "2025-01-01",
+  const axiosSecure = useAxiosSecure();
+  const {
+    data: requests = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["agreementRequests"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/agreement-request");
+
+      return res.data;
     },
-  ];
+  });
 
-  const handleAccept = (id) => {
-    console.log(`Accepting request ID: ${id}`);
+  const handleAccept = async (id) => {
+    await axiosSecure.patch(`/agreement-request/accept/${id}`);
+    refetch();
   };
 
-  const handleReject = (id) => {
-    console.log(`Rejecting request ID: ${id}`);
+  const handleReject = async (id) => {
+    axiosSecure.patch(`/agreement-request/reject/${id}`);
+    refetch();
   };
+
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
+
+  if (isError) {
+    return <div>Error loading agreement requests.</div>;
+  }
 
   return (
     <div>
@@ -40,7 +55,7 @@ const AgreementRequests = () => {
         </thead>
         <tbody>
           {requests.map((req) => (
-            <tr key={req.id}>
+            <tr key={req._id}>
               <td className="border p-2">{req.name}</td>
               <td className="border p-2">{req.email}</td>
               <td className="border p-2">{req.floor}</td>
@@ -51,11 +66,14 @@ const AgreementRequests = () => {
               <td className="border p-2">
                 <button
                   className="text-green-500 mr-2"
-                  onClick={() => handleAccept(req.id)}
+                  onClick={() => handleAccept(req._id)}
                 >
                   Accept
                 </button>
-                <button className="text-red-500" onClick={() => handleReject(req.id)}>
+                <button
+                  className="text-red-500"
+                  onClick={() => handleReject(req._id)}
+                >
                   Reject
                 </button>
               </td>

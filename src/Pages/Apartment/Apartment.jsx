@@ -29,14 +29,13 @@ const Apartment = () => {
   const { apartments = [], count } = data || {};
   const numberOfPages = Math.ceil(count / itemsPerPage);
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const min = e.form.target.min.value;
     const max = e.form.target.max.value;
-    setMaxRent(parseInt(max))
-    setMinRent(parseInt(min))
-  }
-
+    setMaxRent(parseInt(max));
+    setMinRent(parseInt(min));
+  };
 
   const handleApply = (apartment) => {
     if (!user?.email) {
@@ -57,6 +56,7 @@ const Apartment = () => {
       blockName: apartment.blockName,
       apartmentNo: apartment.apartmentNo,
       rent: apartment.rent,
+      date: new Date().toLocaleDateString(),
     };
 
     axiosSecure
@@ -68,34 +68,37 @@ const Apartment = () => {
             "Your application has been submitted!",
             "success"
           );
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: `${res.data.message}`,
+          });
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="container mx-auto">
       <h2 className="text-3xl font-bold mb-4">Available Apartments</h2>
 
-    
       <div className="flex justify-between items-center mb-6">
-        <form onSubmit={handleSubmit}  className="flex gap-2">
+        <form onSubmit={handleSubmit} className="flex gap-2">
           <input
             type="number"
             placeholder="Min Rent"
             className="input input-bordered"
-           name="min"
+            name="min"
           />
           <input
             type="number"
             placeholder="Max Rent"
             className="input input-bordered"
-           name="max"
+            name="max"
           />
         </form>
       </div>
 
-   
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {apartments.map((apartment) => (
           <div key={apartment._id} className="card shadow-lg">
