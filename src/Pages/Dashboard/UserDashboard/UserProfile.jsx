@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserProfile = () => {
-  // Mock data (Replace with real user data from the backend)
+
   const user = {
     name: "John Doe",
     email: "john.doe@example.com",

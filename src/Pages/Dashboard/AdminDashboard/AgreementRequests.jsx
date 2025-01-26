@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loader from "../../../Components/Loader";
 
@@ -14,13 +14,14 @@ const AgreementRequests = () => {
     queryKey: ["agreementRequests"],
     queryFn: async () => {
       const res = await axiosSecure.get("/agreement-request");
-
       return res.data;
     },
   });
+ 
 
   const handleAccept = async (id) => {
     await axiosSecure.patch(`/agreement-request/accept/${id}`);
+
     refetch();
   };
 
@@ -54,31 +55,39 @@ const AgreementRequests = () => {
           </tr>
         </thead>
         <tbody>
-          {requests.map((req) => (
-            <tr key={req._id}>
-              <td className="border p-2">{req.name}</td>
-              <td className="border p-2">{req.email}</td>
-              <td className="border p-2">{req.floor}</td>
-              <td className="border p-2">{req.block}</td>
-              <td className="border p-2">{req.room}</td>
-              <td className="border p-2">{req.rent}</td>
-              <td className="border p-2">{req.date}</td>
-              <td className="border p-2">
-                <button
-                  className="text-green-500 mr-2"
-                  onClick={() => handleAccept(req._id)}
-                >
-                  Accept
-                </button>
-                <button
-                  className="text-red-500"
-                  onClick={() => handleReject(req._id)}
-                >
-                  Reject
-                </button>
-              </td>
-            </tr>
-          ))}
+          {requests ? (
+            <>
+              {requests.map((req) => (
+                <tr key={req._id}>
+                  <td className="border p-2">{req.name}</td>
+                  <td className="border p-2">{req.email}</td>
+                  <td className="border p-2">{req.floorNo}</td>
+                  <td className="border p-2">{req.blockName}</td>
+                  <td className="border p-2">{req.apartmentNo}</td>
+                  <td className="border p-2">{req.rent}</td>
+                  <td className="border p-2">{req.date}</td>
+                  <td className="border p-2">
+                    <button
+                      className="text-green-500 mr-2"
+                      onClick={() => handleAccept(req._id)}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      className="text-red-500"
+                      onClick={() => handleReject(req._id)}
+                    >
+                      Reject
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </>
+          ) : (
+            <>
+              <p>No Agrement found</p>
+            </>
+          )}
         </tbody>
       </table>
     </div>

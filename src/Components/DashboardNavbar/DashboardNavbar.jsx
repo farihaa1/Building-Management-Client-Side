@@ -2,12 +2,20 @@ import React from "react";
 import { FaHome } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
+import useMember from "../../Hooks/useMember";
+import Loader from "../../Components/Loader"
 
 const DashboardNavbar = () => {
  
-  const [isAdmin] = useAdmin();
-  const isUser = false;
-  const isMember = false;
+  const [isAdmin, isAdminLoading] = useAdmin();
+  const [isMember, isMemberLoading] = useMember();
+  const isUser = !isAdmin && !isMember;
+  
+
+  const isLoading = isAdminLoading || isMemberLoading;
+  if(isLoading){
+    return <Loader></Loader>
+  }
 
   const AdminLinks = () => (
     <>

@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
+import useMemberApartment from "../../../Hooks/useMemberApartment";
 
 const MakePayment = () => {
   const [rent, setRent] = useState(1000);
   const [coupon, setCoupon] = useState("");
+
+
+ const { memberInfo, apartmentsLoading }= useMemberApartment(); 
+
+ 
+  if (apartmentsLoading) {
+    return <Loader />;
+  }
+
+
 
   const handleApplyCoupon = () => {
     if (coupon === "DISCOUNT50") {
@@ -17,32 +30,25 @@ const MakePayment = () => {
     alert("Payment successful!");
   };
 
-  const memberDetails = {
-    email: "john.doe@example.com",
-    floor: "2nd Floor",
-    block: "A Block",
-    room: "Room 201",
-    rent: 1000,
-  };
 
   return (
     <div className="p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Make Payment</h2>
       <form>
         <p>
-          <strong>Email:</strong> {memberDetails.email}
+          <strong>Email:</strong> {memberInfo.email}
         </p>
         <p>
-          <strong>Floor:</strong> {memberDetails.floor}
+          <strong>Floor:</strong> {memberInfo.floorNo}
         </p>
         <p>
-          <strong>Block Name:</strong> {memberDetails.block}
+          <strong>Block Name:</strong> {memberInfo.blockName}
         </p>
         <p>
-          <strong>Room No:</strong> {memberDetails.room}
+          <strong>Apartment No:</strong> {memberInfo.apartmentNo}
         </p>
         <p>
-          <strong>Rent:</strong> ${rent}
+          <strong>Rent:</strong> ${memberInfo.rent}
         </p>
         <div className="mt-4">
           <input
@@ -60,6 +66,7 @@ const MakePayment = () => {
             Apply Coupon
           </button>
         </div>
+        <div>{/* <Elements></Elements> */}</div>
         <button
           type="button"
           onClick={handlePayment}

@@ -19,7 +19,7 @@ const Announcements = () => {
         <h3 className="text-4xl font-bold text-gray-700">Announcements</h3>
         <div className="grid grid-cols-2 w-full gap-6 pt-8">
           {announcements.map((item) => (
-            <div key={item.id} className="card w-full bg-primary text-primary-content">
+            <div key={item._id} className="card w-full bg-primary text-primary-content">
               <div className="card-body">
                 <h2 className="card-title text-xl">{item.title}</h2>
                 <p className="text-base py-1">{item.description}</p>
