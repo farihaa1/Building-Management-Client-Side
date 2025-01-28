@@ -6,7 +6,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const useMemberApartment = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   if (!user) {
     return <Loader></Loader>;
@@ -14,15 +14,16 @@ const useMemberApartment = () => {
 
   const { refetch, data: memberInfo = [] } = useQuery({
     queryKey: ["memberInfo", user?.email],
+    enabled: !!user?.email && !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/member/apartments?email=${user.email}`
       );
-      console.log(res.data)
-      return res.data ||{};
+      console.log(res.data);
+      return res.data || {};
     },
   });
-  console.log(memberInfo)
+  console.log(memberInfo);
 
   return [memberInfo, refetch];
 };

@@ -6,6 +6,7 @@ import useMemberApartment from "../../../Hooks/useMemberApartment";
 
 import "./style.css";
 import Loader from "../../../Components/Loader";
+import Swal from "sweetalert2";
 const CheckoutForm = () => {
   const [error, setError] = useState("");
   const [month, setMonth] = useState("");
@@ -20,11 +21,10 @@ const CheckoutForm = () => {
   const [rent, setRent] = useState(1000);
   const [coupon, setCoupon] = useState("");
 
-
   if (!memberInfo) {
     return <Loader></Loader>;
   }
-  console.log(memberInfo,"member")
+  console.log(memberInfo, "member");
   const months = [
     "January",
     "February",
@@ -53,21 +53,15 @@ const CheckoutForm = () => {
     }
   };
 
-
-
-
   useEffect(() => {
-    axiosSecure.post('/create-payment-intent', { email: user.email })
-      .then(res => {
-       
-        setClientSecret(res.data.clientSecret);
-      })
-      
+    if (memberInfo.rent > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { email: user.email })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [user.email]);
-  
-
-
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -96,23 +90,44 @@ const CheckoutForm = () => {
     }
 
     // confirm payment
-    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-            card: card,
-            billing_details: {
-                email: user?.email || 'anonymous',
-                name: user?.displayName || 'anonymous'
-            }
-        }
-    })
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
 
     if (confirmError) {
-        console.log('confirm error')
-    }
-    else{
-      console.log('payment intent', paymentIntent)
-      if(paymentIntent.status==='succeeded'){
-        setTransactionId(paymentIntent.id)
+      console.log("confirm error");
+    } else {
+      console.log("payment intent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        setTransactionId(paymentIntent.id);
+
+        const paymentInfo = {
+          email: user.email,
+          name: user.displayName,
+          rent: memberInfo.rent,
+          payMonth: month,
+          date: new Date(),
+          apartmentId: memberInfo.apartmentId,
+          apartmentNo: memberInfo.apartmentNo,
+          status: "pending",
+        };
+
+        const res = await axiosSecure.post("/payments", paymentInfo);
+        if (res.data.insertedId) {
+          Swal.fire("Success", "Payment Successful!", "success");
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: `${res.data.message}`,
+          });
+        }
       }
     }
   };
@@ -170,8 +185,7 @@ const CheckoutForm = () => {
       <div className="mt-4 w-full flex gap-4">
         <input
           type="text"
-          value={coupon}
-          onChange={(e) => setCoupon(e.target.value)}
+          name="coupon"
           placeholder="Enter coupon code"
           className="input input-bordered w-4/6"
         />
@@ -210,7 +224,9 @@ const CheckoutForm = () => {
         Pay
       </button>
       <p className="text-red-300"></p>
-      {transactionId && <p className="text-green-600">Your Transaction Id: {transactionId}</p>}
+      {transactionId && (
+        <p className="text-green-600">Your Transaction Id: {transactionId}</p>
+      )}
     </form>
   );
 };

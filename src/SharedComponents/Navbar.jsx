@@ -11,7 +11,7 @@ import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {user, loading} = useAuth();
+  const {user, loading, logout} = useAuth();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   // const [isAdmin, isAdminLoading] = useAdmin();
   // const [isMember, isMemberLoading] = useMember();

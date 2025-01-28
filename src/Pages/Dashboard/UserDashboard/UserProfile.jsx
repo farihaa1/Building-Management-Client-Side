@@ -4,20 +4,6 @@ import useAuth from "../../../Hooks/useAuth";
 const UserProfile = () => {
   const { user } = useAuth();
 
-  console.log(user);
-
-  // const user = {
-  //   name: "John Doe",
-  //   email: "john.doe@example.com",
-  //   image: "https://via.placeholder.com/150",
-  //   agreementDate: "None",
-  //   rentedInfo: {
-  //     floor: "None",
-  //     block: "None",
-  //     room: "None",
-  //   },
-  // };
-
   return (
     <div className="user-profile">
       <h1 className="text-2xl font-semibold mb-4">My Profile</h1>

@@ -4,8 +4,9 @@ import Loader from "../../Components/Loader";
 const Announcements = () => {
   const { data: announcements = [], isLoading, isError } = useQuery({
     queryKey: ["announcements"],
+    
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/announcements");
+      const res = await fetch("https://building-management-server-side-nine.vercel.app/announcements");
       return res.json();
     },
   });
