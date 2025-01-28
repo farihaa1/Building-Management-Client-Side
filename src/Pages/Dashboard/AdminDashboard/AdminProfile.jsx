@@ -12,7 +12,7 @@ const AdminProfile = () => {
   // Admin Info Query
   const { data: adminInfo, isLoading: adminLoading, error: adminError } = useQuery({
     queryKey: [user?.email, "adminInfo"],
-    enabled: !!user?.email && !loading,
+    enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/admin/${user.email}`);
       return res.data.adminInfo;

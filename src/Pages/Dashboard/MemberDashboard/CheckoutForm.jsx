@@ -24,7 +24,6 @@ const CheckoutForm = () => {
   if (!memberInfo) {
     return <Loader></Loader>;
   }
-  console.log(memberInfo, "member");
   const months = [
     "January",
     "February",

@@ -23,16 +23,19 @@ const Apartment = () => {
     maxRent
   );
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
   if (isError) return <div>Error loading apartments.</div>;
 
   const { apartments = [], count } = data || {};
+ 
   const numberOfPages = Math.ceil(count / itemsPerPage);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const min = e.form.target.min.value;
-    const max = e.form.target.max.value;
+    const min = e.target.min.value;
+    const max = e.target.max.value;
     setMaxRent(parseInt(max));
     setMinRent(parseInt(min));
   };
@@ -75,31 +78,37 @@ const Apartment = () => {
           });
         }
       })
-      .catch((err) => console.log(err));
+    
   };
 
   return (
-    <div className="container mx-auto px-12">
+    <div className="container mx-auto px-4 lg:px-12">
       <h2 className="main-heading">Available Apartments</h2>
 
       <div className="flex justify-between items-center mb-6">
-        <form onSubmit={handleSubmit} className="flex gap-2">
+        <form onSubmit={handleSubmit} className="flex gap-2 justify-start items-center w-full">
           <input
             type="number"
             placeholder="Min Rent"
-            className="input input-bordered"
+            
+            className="input input-bordered w-2/5 px-2 h-10"
             name="min"
           />
           <input
             type="number"
             placeholder="Max Rent"
-            className="input input-bordered"
+            
+            className="input input-bordered w-2/5 h-10"
             name="max"
           />
+          <button type="submit" className="primary-btn">
+            Filter
+          </button>
         </form>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
         {apartments.map((apartment) => (
           <div key={apartment._id} className="card shadow-lg">
             <img
@@ -107,8 +116,10 @@ const Apartment = () => {
               alt={`Apartment ${apartment.apartmentNo}`}
               className="w-full h-48 object-cover"
             />
-            <div className="card-body">
-              <h3 className="primary-heading">Apartment {apartment.apartmentNo}</h3>
+            <div className="card-body text-sm">
+              <h3 className="primary-heading">
+                Apartment {apartment.apartmentNo}
+              </h3>
               <p>Floor: {apartment.floorNo}</p>
               <p>Block: {apartment.blockName}</p>
               <p>Rent: ${apartment.rent}</p>
@@ -124,9 +135,9 @@ const Apartment = () => {
       </div>
 
       {/* Pagination controls */}
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center items-center mt-6 gap-1 text-xs lg:text-sm">
         <button
-          className="btn btn-secondary"
+          className="primary-btn2"
           onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
           disabled={currentPage === 0}
         >
@@ -135,8 +146,8 @@ const Apartment = () => {
         {[...Array(numberOfPages)].map((_, idx) => (
           <button
             key={idx}
-            className={`btn ${
-              currentPage === idx ? "btn-primary" : "btn-outline"
+            className={` ${
+              currentPage === idx ? "primary-btn" : "primary-btn1"
             }`}
             onClick={() => setCurrentPage(idx)}
           >
@@ -144,7 +155,7 @@ const Apartment = () => {
           </button>
         ))}
         <button
-          className="btn btn-secondary"
+          className="primary-btn2"
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, numberOfPages - 1))
           }

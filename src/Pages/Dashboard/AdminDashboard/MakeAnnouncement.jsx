@@ -16,7 +16,7 @@ const MakeAnnouncement = () => {
   const onSubmit = (data) => {
     axiosPublic.post("/announcement", data).then((res) => {
       if (res.data.insertedId) {
-        console.log("Announcement added to the database");
+      
         reset();
         Swal.fire({
           position: "top-end",

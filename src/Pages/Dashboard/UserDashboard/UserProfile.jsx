@@ -6,8 +6,8 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile">
-      <h1 className="text-2xl font-semibold mb-4">My Profile</h1>
-      <div className="flex items-center gap-4">
+      <h1 className="lg:text-xl text-primaryColor font-bold my-4">My Profile</h1>
+      <div className="flex flex-col lg:items-center gap-4 text-sm">
         <img
           src={user.photoURL}
           alt="User Profile"
@@ -22,14 +22,14 @@ const UserProfile = () => {
           </p>
         </div>
       </div>
-      <div className="mt-6">
+      <div className="mt-3 text-xs">
         <p>
           <strong>Agreement Accept Date:</strong> none
         </p>
         <p>
           <strong>Rented Apartment Info:</strong>none
         </p>
-        <ul className="ml-4">
+        <ul className="text-xs">
           <li>Floor: none</li>
           <li>Block: none</li>
           <li>Room No: none</li>

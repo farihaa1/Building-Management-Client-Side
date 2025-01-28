@@ -5,10 +5,10 @@ const AboutUs = () => {
   return (
     <div className="about-building bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-6 sm:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl font-extrabold tracking-tight mb-6">
+        <h2 className="text-3xl font-extrabold tracking-tight mb-6">
           About the Building
         </h2>
-        <p className="text-lg sm:text-xl leading-relaxed mb-8 max-w-4xl mx-auto">
+        <p className=" text-sm leading-relaxed mb-8 max-w-4xl mx-auto">
           Nestled in the heart of the city, Harmony Heights offers an unmatched
           living experience. This architectural masterpiece features
           state-of-the-art amenities, breathtaking views, and an eco-friendly

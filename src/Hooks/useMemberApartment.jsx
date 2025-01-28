@@ -14,16 +14,16 @@ const useMemberApartment = () => {
 
   const { refetch, data: memberInfo = [] } = useQuery({
     queryKey: ["memberInfo", user?.email],
-    enabled: !!user?.email && !loading,
+    enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/member/apartments?email=${user.email}`
       );
-      console.log(res.data);
+     
       return res.data || {};
     },
   });
-  console.log(memberInfo);
+  
 
   return [memberInfo, refetch];
 };

@@ -81,7 +81,7 @@ const Banner = () => {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 3500,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -115,11 +115,9 @@ const Banner = () => {
             <div
               className="banner-content relative z-10 text-center text-white"
             >
-              <h1 className="text-4xl font-bold pt-2 pb-1">{item.heading}</h1>
-              <p className="text-gray-400 py-2 ">{item.title}</p>
-              <a href={item.callToAction.link} className="btn">
-                {item.callToAction.text}
-              </a>
+              <h1 className="heading">{item.heading}</h1>
+              <p className="para">{item.title}</p>
+              
             </div>
           </div>
         </SwiperSlide>

@@ -11,11 +11,11 @@ import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {user, loading, logout} = useAuth();
+  const { user, loading, logout } = useAuth();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  // const [isAdmin, isAdminLoading] = useAdmin();
-  // const [isMember, isMemberLoading] = useMember();
-  // const isUser = !isAdmin && !isMember;
+  const [isAdmin, isAdminLoading] = useAdmin();
+  const [isMember, isMemberLoading] = useMember();
+  const isUser = !isAdmin && !isMember;
 
   if (loading) {
     return <Loader />;
@@ -71,7 +71,13 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/dashboard"
+          to={
+            isAdmin
+              ? "/dashboard/admin-profile"
+              : isMember
+              ? "/dashboard/member-profile"
+              : "/dashboard/user-profile"
+          }
           className={({ isActive }) =>
             `font-semibold ${
               isActive ? "font-bold underline" : "text-green-950 "
@@ -88,7 +94,7 @@ const Navbar = () => {
     <motion.div
       animate={{ y: [-100, 0] }}
       transition={{ duration: 0.8 }}
-      className="text-green-950 font-poppins py-2 lg:px-10"
+      className="text-green-950 font-poppins py-1 lg:px-10"
     >
       <div className="navbar container mx-auto">
         {/* Navbar Start */}
@@ -112,10 +118,10 @@ const Navbar = () => {
           </div>
           <Link
             to="/"
-            className="text-2xl md:text-3xl font-bold flex items-center gap-2 md:gap-4"
+            className="text-base lg:text-2xl md:text-3xl font-bold flex items-center gap-2 md:gap-4"
           >
             <img
-              className="w-10 h-10 object-cover"
+              className="w-7 h-7 lg:w-10 lg:h-10 object-cover"
               src="/logo/apartment.svg"
               alt="Apartment Logo"
             />

@@ -37,8 +37,7 @@ const ManageMembers = () => {
       confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Implement backend logic for role change
-        console.log(`Removing member with ID: ${id}`);
+        
         axiosSecure.patch("/users/remove-role")
           .then(res => console.log(res))
           .catch(err => console.error(err));
