@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .primary-btn {
+      @apply bg-primaryColor rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
+    }
+    .primary-heading{
+        @apply text-2xl font-bold text-green-950
+    }
+    .main-heading{
+        @apply text-3xl font-bold text-green-950 my-5
+    }
+  }

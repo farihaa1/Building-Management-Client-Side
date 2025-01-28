@@ -3,18 +3,16 @@ import { FaHome } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import useMember from "../../Hooks/useMember";
-import Loader from "../../Components/Loader"
+import Loader from "../../Components/Loader";
 
 const DashboardNavbar = () => {
- 
   const [isAdmin, isAdminLoading] = useAdmin();
   const [isMember, isMemberLoading] = useMember();
   const isUser = !isAdmin && !isMember;
-  
 
   const isLoading = isAdminLoading || isMemberLoading;
-  if(isLoading){
-    return <Loader></Loader>
+  if (isLoading) {
+    return <Loader></Loader>;
   }
 
   const AdminLinks = () => (
@@ -55,7 +53,7 @@ const DashboardNavbar = () => {
   const CommonLinks = () => (
     <>
       <li>
-        <Link to="/" className="text-blue-500 hover:underline">
+        <Link to="/" className="text-blue-500 hover:underline w-full flex items-center justify-center gap-4">
           <FaHome></FaHome>
           Home
         </Link>
@@ -153,12 +151,14 @@ const DashboardNavbar = () => {
   };
 
   return (
-    <div>
-      <div className="navbar-start hidden lg:flex items-center justify-center py-1 text-xl pb-6 w-full">
-        <ul className="px-1 w-full text-2xl flex flex-col gap-3">
-          {renderLinks()}
-        </ul>
-      </div>
+    <div className="navbar-start hidden lg:flex flex-col items-center justify-center py-1 text-xl pb-6 w-full">
+      <ul className="px-1 w-full text-2xl flex flex-col gap-3">
+        {renderLinks()}
+      </ul>
+      <div className="divider "></div>
+      <ul className="px-1 w-full text-2xl flex gap-3">
+        {CommonLinks()}
+      </ul>
     </div>
   );
 };

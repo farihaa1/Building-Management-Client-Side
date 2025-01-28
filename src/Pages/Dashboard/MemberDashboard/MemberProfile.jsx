@@ -6,11 +6,9 @@ import Loader from "../../../Components/Loader";
 
 const MemberProfile = () => {
   const { user } = useContext(AuthContext);
-  const { memberInfo, apartmentsLoading } = useMemberApartment();
+  const [memberInfo] = useMemberApartment();
 
-  if(apartmentsLoading){
-    return<Loader></Loader>;
-  }
+
 
   return (
     <div className="p-4 pb-0">
@@ -20,7 +18,7 @@ const MemberProfile = () => {
         <div className="space-y-2 p-2">
           <p>Name:{user?.displayName}</p>
           <p>Email: {user?.email}</p>
-          <p>Agreement Accept Date: None</p>
+          <p>Agreement Accept Date: {memberInfo.date}</p>
           <div>
             <h4> Rented Apartment Info:</h4>
             <p>

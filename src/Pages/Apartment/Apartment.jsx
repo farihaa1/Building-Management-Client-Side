@@ -79,8 +79,8 @@ const Apartment = () => {
   };
 
   return (
-    <div className="container mx-auto">
-      <h2 className="text-3xl font-bold mb-4">Available Apartments</h2>
+    <div className="container mx-auto px-12">
+      <h2 className="main-heading">Available Apartments</h2>
 
       <div className="flex justify-between items-center mb-6">
         <form onSubmit={handleSubmit} className="flex gap-2">
@@ -108,12 +108,12 @@ const Apartment = () => {
               className="w-full h-48 object-cover"
             />
             <div className="card-body">
-              <h3 className="card-title">Apartment {apartment.apartmentNo}</h3>
+              <h3 className="primary-heading">Apartment {apartment.apartmentNo}</h3>
               <p>Floor: {apartment.floorNo}</p>
               <p>Block: {apartment.blockName}</p>
               <p>Rent: ${apartment.rent}</p>
               <button
-                className="btn btn-primary"
+                className=" primary-btn"
                 onClick={() => handleApply(apartment)}
               >
                 Apply Now
