@@ -183,7 +183,7 @@ const DashboardNavbar = () => {
 
   return (
     <div className=" h-full bg-green-950 min-h-svh">
-      <div className="navbar-start hidden min-h-max lg:flex  flex-col bg-green-950 text-white items-center justify-center py-1 text-xl pb-6 w-full">
+      <div className="navbar-start hidden min-h-max lg:flex  flex-col bg-green-950 lg:p-4 lg:rounded-lg text-white items-center justify-center py-1 text-xl pb-6 w-full">
         <ul className="px-1 w-full text-2xl flex flex-col gap-3">
           {renderLinks()}
         </ul>
