@@ -5,6 +5,11 @@ Welcome to the client-side of **Harmony Heights**, a luxury apartment website. T
 
 
 ##  Live Site
+<div align="center">
+  <img height="220" width="full" src="[https://i.ibb.co.com/20HyqMry/profile-banner.jpg](https://i.ibb.co.com/bjZ79Z3x/website1.png)"  />
+</div>
+
+##  Live Site link
 Visit the live application here: [Harmony heights](https://building-management-7130f.web.app)
 ## client-side code GitHub repository
 Visit the live application here: [Harmony heights](https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-farihaa1)
