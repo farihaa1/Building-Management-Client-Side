@@ -6,7 +6,7 @@ Welcome to the client-side of **Harmony Heights**, a luxury apartment website. T
 
 ##  Live Site
 <div align="center">
-  <img height="220" width="full" src="[https://i.ibb.co.com/20HyqMry/profile-banner.jpg](https://i.ibb.co.com/bjZ79Z3x/website1.png)"  />
+  <img height="full" width="full" src="https://i.ibb.co.com/bjZ79Z3x/website1.png"  />
 </div>
 
 ##  Live Site link
