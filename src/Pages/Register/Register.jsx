@@ -29,12 +29,13 @@ const Register = () => {
           const userInfo = {
             name: data.name,
             email: data.email,
-            photoURL:data.photoURL
+            photoURL:data.photoURL,
+            date: new Date()
         }
         axiosPublic.post('/users', userInfo)
             .then(res => {
                 if (res.data.insertedId) {
-                    console.log('user added to the database')
+                 
                     reset();
                     Swal.fire({
                         position: 'top-end',
@@ -152,7 +153,7 @@ const Register = () => {
               </div>
               <div className="form-control mt-6">
                 <input
-                  className="btn btn-primary"
+                  className="primary-btn"
                   type="submit"
                   value="Sign Up"
                 />

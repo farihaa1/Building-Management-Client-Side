@@ -1,12 +1,11 @@
 import React from "react";
-import SocialLogin from "../SocialLogin";
 import img from "../../../public/logo/apartment.svg";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div>
-      <footer className="footer bg-green-950 text-white p-10">
+    <div className="bg-green-950">
+      <footer className="footer container mx-auto px-2 lg:px-12 text-white p-10">
         <aside>
           <img src={img} className="w-12" alt="" />
           <p>

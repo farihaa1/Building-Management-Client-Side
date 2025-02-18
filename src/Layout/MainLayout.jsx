@@ -4,7 +4,7 @@ import Footer from "../Components/Footer/Footer";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="font-syne">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>

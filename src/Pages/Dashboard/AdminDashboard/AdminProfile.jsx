@@ -1,52 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Loader from "../../../Components/Loader";
 
 const AdminProfile = () => {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic();
 
   // Admin Info Query
-  const { data: adminInfo, isLoading: adminLoading, error: adminError } = useQuery({
+  const {
+    data: adminInfo,
+    isLoading: adminLoading,
+    error: adminError,
+  } = useQuery({
     queryKey: [user?.email, "adminInfo"],
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/admin/${user.email}`);
       return res.data.adminInfo;
     },
-    enabled: !!user?.email,
+    
   });
+  
 
-  // Users Query
-  const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
-    queryKey: ["users"],
+  const { data: statistics=[], isLoading: statisticsLoading } = useQuery({
+    queryKey: ["statistics"],
+    enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get("/admin/apartments");
+
       return res.data;
     },
   });
-
-  // Apartments Query
-  const { data: apartments, isLoading: apartmentsLoading} = useQuery({
-    queryKey: ["apartments"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/admin/apartments")
-     
-      return res.data;
-    },
-  });
- 
 
   // Consolidated Loading and Error Handling
-  if (authLoading || adminLoading || usersLoading ) {
-    return <div>Loading...</div>;
+  if (adminLoading) {
+    return <Loader></Loader>;
   }
-
-
-
 
   return (
     <div>
@@ -65,12 +56,12 @@ const AdminProfile = () => {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <p>Total Rooms: {adminInfo?.totalRooms || 0}</p>
-        <p>Available Rooms: {adminInfo?.availableRooms || 0}</p>
-        <p>Agreement Rooms: {adminInfo?.agreementRooms || 0}</p>
-        <p>Total Users: {users?.length || 0}</p>
-        <p>Total Members: {users?.filter(user => user.isMember).length || 0}</p>
-        <p>Total Apartments: {apartments?.length || 0}</p>
+        <p>Total Apartments: {statistics?.totalRooms || 0}</p>
+
+        <p>Agreement Rooms: {statistics?.unavailablePercentage || 0}%</p>
+        <p>Total Users: {statistics?.totalUsers || 0}</p>
+        <p>Available Rooms: {statistics?.availablePercentage || 0}%</p>
+        <p>Total Members: {statistics?.totalMembers || 0}</p>
       </div>
     </div>
   );

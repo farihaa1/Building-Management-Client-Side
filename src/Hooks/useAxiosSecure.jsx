@@ -1,19 +1,19 @@
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import useAuth from './useAuth';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
 
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
 
   const axiosSecure = axios.create({
-    baseURL: 'https://building-management-server-side-nine.vercel.app',
+    baseURL: "https://building-management-server-side-nine.vercel.app",
   });
 
   // Request interceptor to add the authorization token to headers
   axiosSecure.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('access-token');
+      const token = localStorage.getItem("access-token");
       if (token) {
         config.headers.authorization = `Bearer ${token}`;
       }
@@ -29,9 +29,8 @@ const useAxiosSecure = () => {
     (response) => response,
     async (error) => {
       if (error.response && error.response.status === 403) {
-        
         await logOut();
-        navigate('/sign-in');
+        navigate("/sign-in");
       }
       return Promise.reject(error);
     }

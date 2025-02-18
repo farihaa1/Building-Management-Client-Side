@@ -22,58 +22,58 @@ const DashboardNavbar = () => {
   const AdminLinks = () => (
     <>
       <li>
-        <Link to="admin-profile"  className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+        <NavLink to="admin-profile"   className={({ isActive }) =>
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }>
           Admin Profile
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="manage-members"  className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+        <NavLink to="manage-members"   className={({ isActive }) =>
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }>
           Manage Members
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="make-announcement"  className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+        <NavLink to="make-announcement"   className={({ isActive }) =>
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }>
           Make Announcement
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="agreement-requests"  className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+        <NavLink to="agreement-requests"   className={({ isActive }) =>
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }>
           Agreement Requests
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="manage-coupons"  className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+        <NavLink to="manage-coupons"   className={({ isActive }) =>
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }>
           Manage Coupons
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="all-users"  className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+        <NavLink to="all-users"   className={({ isActive }) =>
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }>
           All Users
-        </Link>
+        </NavLink>
       </li>
     </>
   );
@@ -81,13 +81,17 @@ const DashboardNavbar = () => {
   const CommonLinks = () => (
     <>
       <li>
-        <Link
+        <NavLink
           to="/"
-          className="hover:underline w-full flex items-center gap-2 text-gray-400"
+          className={({ isActive }) =>
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
+            }`
+          }
         >
           <FaHome></FaHome>
           Home
-        </Link>
+        </NavLink>
       </li>
     </>
   );
@@ -98,8 +102,8 @@ const DashboardNavbar = () => {
         <NavLink
           to="user-profile"
           className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }
         >
@@ -110,8 +114,8 @@ const DashboardNavbar = () => {
         <NavLink
           to="announcements"
           className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }
         >
@@ -127,8 +131,8 @@ const DashboardNavbar = () => {
         <NavLink
           to="member-profile"
           className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }
         >
@@ -139,8 +143,8 @@ const DashboardNavbar = () => {
         <NavLink
           to="make-payment"
           className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }
         >
@@ -151,8 +155,8 @@ const DashboardNavbar = () => {
         <NavLink
           to="payment-history"
           className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }
         >
@@ -163,8 +167,8 @@ const DashboardNavbar = () => {
         <NavLink
           to="announcements"
           className={({ isActive }) =>
-            ` ${
-              isActive ? "text-white font-semibold" : "text-gray-500"
+            `md:text-sm ${
+              isActive ? "text-white font-semibold underline" : "text-gray-300"
             }`
           }
         >
@@ -175,15 +179,17 @@ const DashboardNavbar = () => {
   );
 
   const renderLinks = () => {
-    if (isAdmin) return <AdminLinks />;
     if (isUser) return <UserLinks />;
     if (isMember) return <MemberLinks />;
+    if (isAdmin) return <AdminLinks />;
+
+   
     return null;
   };
 
   return (
-    <div className=" h-full bg-green-950 min-h-svh">
-      <div className="navbar-start hidden min-h-max lg:flex  flex-col bg-green-950 lg:p-4 lg:rounded-lg text-white items-center justify-center py-1 text-xl pb-6 w-full">
+    <div className=" bg-green-950 min-h-svh">
+      <div className="navbar-start hidden lg:flex  flex-col bg-green-950 lg:p-4 lg:rounded-lg text-white items-center justify-center py-1 text-xl pb-6 w-full">
         <ul className="px-1 w-full text-2xl flex flex-col gap-3">
           {renderLinks()}
         </ul>

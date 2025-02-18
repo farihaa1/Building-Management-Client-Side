@@ -60,11 +60,11 @@ const Login = () => {
       </Helmet>
       <div className="hero min-h-screen my-12">
         <div className="hero-content flex-col md:flex-row-reverse">
-          <div className="hidden lg:flex text-center md:w-1/2 lg:text-left">
+          <div className="hidden lg:flex text-center lg:w-1/2 lg:text-left">
            
            <img src={img} alt="" />
           </div>
-          <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+          <div className="card max-w-2xl lg:w-1/2  shadow-2xl bg-base-100">
           <h1 className="text-xl lg:text-4xl font-bold text-center mt-4 w-full">Login now!</h1>
             <form onSubmit={handleLogin} className="card-body p-6 flex">
               <div className="form-control">
@@ -109,7 +109,7 @@ const Login = () => {
               <div className="form-control mt-6">
                 <input
                   disabled={disabled}
-                  className="btn btn-primary"
+                  className="primary-btn disabled:btn"
                   type="submit"
                   value="Login"
                 />

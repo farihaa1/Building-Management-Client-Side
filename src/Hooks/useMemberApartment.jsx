@@ -8,7 +8,7 @@ const useMemberApartment = () => {
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useContext(AuthContext);
 
-  if (!user) {
+  if (!user || loading) {
     return <Loader></Loader>;
   }
 

@@ -56,7 +56,7 @@ const MakeAnnouncement = () => {
             <span className="text-red-500">{errors.description.message}</span>
           )}
         </div>
-        <button type="submit" className=" text-white px-4 py-2 bg-red-500">
+        <button type="submit" className="primary-btn">
           Submit
         </button>
       </form>

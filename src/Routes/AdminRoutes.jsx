@@ -16,7 +16,6 @@ const AdminRoutes = ({ children }) => {
     return children;
   }
 
-  console.log('Redirecting to home...');
   return <Navigate to="/" state={{ from: location }} replace />;
 };
 

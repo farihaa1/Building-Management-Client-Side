@@ -72,7 +72,7 @@ const AllUsers = () => {
                     });
                   })
                   .catch((error) => {
-                    console.error(error);
+                    
                     Swal.fire(
                       "Error",
                       `Error deleting user: ${error.message}`,
@@ -89,7 +89,7 @@ const AllUsers = () => {
             });
           })
           .catch((error) => {
-            console.error(error);
+          
             Swal.fire(
               "Reauthentication Failed",
               "Please ensure your password is correct.",
@@ -101,8 +101,8 @@ const AllUsers = () => {
   };
 
   return (
-    <div>
-      <div className="flex justify-evenly my-4">
+    <div className="w-full">
+      <div className="flex justify-evenly my-4 w-full">
         <h2 className="text-3xl">All Users</h2>
         <h2 className="text-3xl">Total Users: {users.length}</h2>
       </div>
@@ -129,11 +129,10 @@ const AllUsers = () => {
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn btn-md bg-orange-500"
+                      className=""
                     >
                       <h2
-                        className="text-white 
-                                        text-lg"
+                        className="primary-btn"
                       >
                         Make Admin
                       </h2>

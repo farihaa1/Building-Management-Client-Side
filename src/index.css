@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Syne:wght@400..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +7,9 @@
 @layer components {
     .primary-btn {
       @apply bg-primaryColor rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
+    }
+    .danger-btn {
+      @apply bg-red-600 rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
     }
     .primary-btn1 {
       @apply text-black rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl  my-2;
@@ -19,9 +24,12 @@
         @apply text-3xl font-bold text-green-950 my-5
     }
     .heading{
-      @apply text-xl lg:text-3xl font-bold pt-2 pb-1
+      @apply text-xl lg:text-6xl font-bold pt-2 pb-1 font-syne
     }
     .para{
       @apply text-xs lg:text-sm text-gray-300
+    }
+    .custom-prev-button{
+      @apply text-4xl text-gray-300
     }
   }

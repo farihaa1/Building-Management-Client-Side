@@ -20,6 +20,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import AdminRoutes from "./AdminRoutes";
 import UserProfile from "../Pages/Dashboard/UserDashboard/UserProfile";
 import MemberRoutes from "./MemberRoutes";
+import PaymentInfo from "../Pages/Dashboard/MemberDashboard/PaymentInfo";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -74,6 +75,14 @@ const Routes = createBrowserRouter([
         element: (
           <MemberRoutes>
             <MakePayment></MakePayment>
+          </MemberRoutes>
+        ),
+      },
+      {
+        path: "make-payment/pay",
+        element: (
+          <MemberRoutes>
+            <PaymentInfo></PaymentInfo>
           </MemberRoutes>
         ),
       },

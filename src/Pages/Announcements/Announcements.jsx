@@ -1,17 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Components/Loader";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Announcements = () => {
-  const { data: announcements = [], isLoading, isError } = useQuery({
+  const axiosPublic = useAxiosPublic()
+  const { data: announcements = [], isLoading: isAnnouncementLoading, isError } = useQuery({
     queryKey: ["announcements"],
     
     queryFn: async () => {
-      const res = await fetch("https://building-management-server-side-nine.vercel.app/announcements");
-      return res.json();
+      const res = await axiosPublic.get("/announcements");
+      return res.data;
     },
   });
 
-  if (isLoading) return <Loader></Loader>;
+  if (isAnnouncementLoading) return <Loader></Loader>;
   if (isError) return <p>Failed to load announcements.</p>;
 
   return (

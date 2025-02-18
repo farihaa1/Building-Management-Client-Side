@@ -3,13 +3,13 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import useMemberApartment from "../../../Hooks/useMemberApartment";
-
 import "./style.css";
 import Loader from "../../../Components/Loader";
 import Swal from "sweetalert2";
-const CheckoutForm = () => {
+import useCoupons from "../../../Hooks/useCoupons";
+
+const CheckoutForm = ({ filterCoupon }) => {
   const [error, setError] = useState("");
-  const [month, setMonth] = useState("");
   const [isCouponValid, setIsCouponValid] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -20,52 +20,40 @@ const CheckoutForm = () => {
   const [memberInfo] = useMemberApartment();
   const [rent, setRent] = useState(1000);
   const [coupon, setCoupon] = useState("");
-
-  if (!memberInfo) {
-    return <Loader></Loader>;
-  }
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const handleMonthChange = (e) => {
-    setMonth(e.target.value);
-  };
-
-  const handleApplyCoupon = () => {
-    if (coupon === "DISCOUNT50") {
-      setRent((prevRent) => prevRent * 0.5);
-      alert("Coupon applied successfully!");
-    } else {
-      alert("Invalid coupon!");
-    }
-  };
+  const [refetch, coupons, isCouponLoading, isError] = useCoupons();
 
   useEffect(() => {
+  
     if (memberInfo.rent > 0) {
       axiosSecure
-        .post("/create-payment-intent", { email: user.email })
+        .post("/create-payment-intent", {
+          email: user.email,
+          couponCode: filterCoupon[0]?.code,
+        })
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         });
     }
   }, [user.email]);
 
+  const handleCouponChange = (e) => {
+
+    setCoupon(e.target.value);
+  };
+
+  const handleApplyCoupon = () => {
+    if (filterCoupon?.status !== "active") {
+      setRent((prevRent) => prevRent * 0.5);
+      Swal.fire("Success", "Coupon applied successfully!", "success");
+    } else {
+      Swal.fire("Error", "Invalid coupon code!", "error");
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
+    if (!stripe || !elements || !clientSecret) {
       return;
     }
 
@@ -81,10 +69,10 @@ const CheckoutForm = () => {
     });
 
     if (error) {
-      console.log("payment error", error);
+     
       setError(error.message);
     } else {
-      console.log("payment method", paymentMethod);
+     
       setError("");
     }
 
@@ -101,9 +89,9 @@ const CheckoutForm = () => {
       });
 
     if (confirmError) {
-      console.log("confirm error");
+     
     } else {
-      console.log("payment intent", paymentIntent);
+     
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
 
@@ -132,70 +120,44 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form className=" max-w-xl flex flex-col gap-3" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={memberInfo.email}
-        className="input input-bordered w-full bg-base-200 text-gray-500"
-        readOnly
-      />
-      <input
-        type="text"
-        value={memberInfo.floorNo}
-        className="input input-bordered w-full bg-base-200 text-gray-500"
-        readOnly
-      />
-      <input
-        type="text"
-        value={memberInfo.blockName}
-        className="input input-bordered w-full bg-base-200 text-gray-500"
-        readOnly
-      />
-      <input
-        type="text"
-        value={memberInfo.apartmentNo}
-        className="input input-bordered w-full bg-base-200 text-gray-500"
-        readOnly
-      />
-      <input
-        type="text"
-        value={memberInfo.rent}
-        className="input input-bordered w-full bg-base-200 text-gray-500"
-        readOnly
-      />
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-2" htmlFor="month">
-          Select Month:
-        </label>
-        <select
-          id="month"
-          value={month}
-          onChange={handleMonthChange}
-          className="border rounded p-2 w-full"
-        >
-          <option value="">Select Month</option>
-          {months.map((month, index) => (
-            <option key={index} value={month}>
-              {month}
-            </option>
-          ))}
-        </select>
-      </div>
+    <form className="max-w-xl flex flex-col gap-3" onSubmit={handleSubmit}>
       <div className="mt-4 w-full flex gap-4">
-        <input
-          type="text"
-          name="coupon"
-          placeholder="Enter coupon code"
-          className="input input-bordered w-4/6"
-        />
-
-        <button
-          className="input input-bordered"
-          type="button"
-          onClick={handleApplyCoupon}
-        >
-          Apply Coupon
-        </button>
+        {filterCoupon ? (
+          <>
+            <input
+              type="text"
+              name="coupon"
+              value={filterCoupon[0]?.code}
+              className="input input-bordered w-4/6 text-gray-600"
+              readOnly
+            />
+            <button
+              className="input input-bordered"
+              type="button"
+              onClick={handleApplyCoupon}
+            >
+              Apply Coupon
+            </button>
+          </>
+        ) : (
+          <>
+            <input
+              type="text"
+              name="coupon"
+              value={coupon}
+              onChange={handleCouponChange}
+              placeholder="Enter coupon code"
+              className="input input-bordered w-4/6 text-gray-600"
+            />
+            <button
+              className="input input-bordered w-2/6"
+              type="button"
+              onClick={handleApplyCoupon}
+            >
+              Apply Coupon
+            </button>
+          </>
+        )}
       </div>
 
       <CardElement
@@ -216,13 +178,13 @@ const CheckoutForm = () => {
         }}
       />
       <button
-        className="btn btn-sm btn-primary my-4"
+        className="primary-btn text-bold my-4"
         disabled={!stripe}
         type="submit"
       >
         Pay
       </button>
-      <p className="text-red-300"></p>
+      <p className="text-red-300">{error}</p>
       {transactionId && (
         <p className="text-green-600">Your Transaction Id: {transactionId}</p>
       )}

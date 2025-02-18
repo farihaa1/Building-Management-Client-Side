@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { FaBars } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from "react";
+import { FaBars, FaCross } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Providers/AuthProvider";
@@ -10,19 +10,36 @@ import useMember from "../Hooks/useMember";
 import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isUser, setIsUser] = useState(false)
   const { user, loading, logout } = useAuth();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isAdmin, isAdminLoading] = useAdmin();
   const [isMember, isMemberLoading] = useMember();
-  const isUser = !isAdmin && !isMember;
 
-  if (loading) {
+
+  
+  useEffect(() => {
+    if (user && !isAdmin && !isMember) {
+      setIsUser(true);
+    } else {
+      setIsUser(false);
+    }
+  }, [user, isAdmin, isMember]);
+
+
+  if (loading || isAdminLoading || isMemberLoading) {
     return <Loader />;
   }
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
+
+  useEffect(()=>{
+    // on click ousinde
+    setIsMenuOpen(false)
+    setIsProfileOpen(false)
+  },[])
 
   const handleSignOut = () => {
     Swal.fire({
@@ -38,7 +55,7 @@ const Navbar = () => {
           .then(() =>
             Swal.fire("Logged Out", "You have been logged out", "success")
           )
-          .catch((err) => console.error(err));
+          
       }
     });
   };
@@ -50,7 +67,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             `font-semibold ${
-              isActive ? "font-bold underline" : "text-green-950 "
+              isActive ? "font-bold underline transition-all duration-500 " : "text-lg md:text-xl"
             }`
           }
         >
@@ -62,7 +79,7 @@ const Navbar = () => {
           to="/apartment"
           className={({ isActive }) =>
             `font-semibold ${
-              isActive ? "font-bold underline" : "text-green-950 "
+              isActive ? "font-bold underline transition-all duration-500 " : "text-lg md:text-xl"
             }`
           }
         >
@@ -72,15 +89,15 @@ const Navbar = () => {
       <li>
         <NavLink
           to={
-            isAdmin
-              ? "/dashboard/admin-profile"
+            isUser
+              ? "/dashboard/user-profile"
               : isMember
               ? "/dashboard/member-profile"
-              : "/dashboard/user-profile"
+              : "/dashboard/admin-profile"
           }
           className={({ isActive }) =>
             `font-semibold ${
-              isActive ? "font-bold underline" : "text-green-950 "
+              isActive ? "font-bold underline transition-all duration-500 " : "text-lg md:text-xl"
             }`
           }
         >
@@ -94,31 +111,32 @@ const Navbar = () => {
     <motion.div
       animate={{ y: [-100, 0] }}
       transition={{ duration: 0.8 }}
-      className="text-green-950 font-poppins py-1 lg:px-10"
+      className="text-white font-mulish py-1 lg:px-10 bg-primary "
     >
-      <div className="navbar container mx-auto">
+      <div className="navbar lg:container mx-auto">
         {/* Navbar Start */}
-        <div className="navbar-start">
+        <div className="w-1/2 lg:w-1/4">
           {/* Mobile Dropdown */}
-          <div className="dropdown lg:hidden">
+          <div className="lg:hidden">
             <div
               onClick={toggleMenu}
-              className="px-2 flex justify-end items-center rounded-md cursor-pointer mr-2"
+              className="lg:px-2 flex justify-end items-center cursor-pointer mr-3"
             >
               <FaBars className="w-5 h-5 md:w-8 md:h-8" />
             </div>
             {isMenuOpen && (
               <ul
-                className="absolute bg-base-100 rounded-lg z-[10] mt-3 w-48 px-5 shadow space-y-3 py-6 left-0"
+                className=" bg-primaryColor w-40 transition-all ease-linear duration-200 z-10 px-2 shadow space-y-3 py-6 left-0 top-[4.4rem] min-h-screen fixed"
                 onClick={toggleMenu}
               >
+              
                 {Links}
               </ul>
             )}
           </div>
           <Link
             to="/"
-            className="text-base lg:text-2xl md:text-3xl font-bold flex items-center gap-2 md:gap-4"
+            className="text-base lg:text-2xl md:text-3xl font-bold flex items-center gap-1 lg:gap-3"
           >
             <img
               className="w-7 h-7 lg:w-10 lg:h-10 object-cover"
@@ -130,12 +148,12 @@ const Navbar = () => {
         </div>
 
         {/* Navbar Center */}
-        <div className="navbar-center hidden lg:flex items-center justify-center py-1 text-xl pb-6">
-          <ul className="menu-horizontal px-1 gap-4 space-x-3">{Links}</ul>
+        <div className="w-2/4 navbar-center hidden lg:flex items-center justify-center  text-xl">
+          <ul className="menu-horizontal px-1 gap-4 space-x-3 justify-center">{Links}</ul>
         </div>
 
         {/* Navbar End */}
-        <div className="navbar-end flex items-center">
+        <div className="w-1/2 lg:w-1/4 justify-end  flex items-center">
           {user ? (
             <div className="relative">
               <div
@@ -158,7 +176,7 @@ const Navbar = () => {
                 )}
               </div>
               {isProfileOpen && (
-                <div className="absolute top-14 w-72 py-4 rounded-xl right-0 bg-white px-6 shadow-md z-[10]">
+                <div className="absolute top-14 w-72 py-4  right-0 bg-white px-6 shadow-md z-[10]">
                   <ul className="menu-vertical p-2 space-y-2 text-green-950">
                     <li className="py-1 pl-2">
                       {user?.displayName || "Guest User"}
@@ -169,7 +187,7 @@ const Navbar = () => {
                     <li className="divider pb-1 text-green-950"></li>
                     <button
                       onClick={handleSignOut}
-                      className="primary-btn text-white md:text-lg px-5 py-2 rounded-xl w-full"
+                      className="primary-btn text-white md:text-lg px-5 py-2  w-full"
                     >
                       Sign Out
                     </button>
@@ -181,13 +199,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/register"
-                className="bg-primary text-white px-4 rounded-lg py-2 mr-3"
+                className="primary-btn text-white px-4  py-2 mr-3"
               >
                 Register
               </Link>
               <Link
                 to="/sign-in"
-                className="bg-primary text-white px-4 rounded-lg py-2"
+                className="primary-btn text-white px-4 py-2"
               >
                 Sign In
               </Link>

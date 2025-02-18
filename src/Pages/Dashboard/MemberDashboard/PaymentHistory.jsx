@@ -23,13 +23,14 @@ const PaymentHistory = () => {
     },
   });
 
+
  
   if (paymentLoading) {
     return <Loader />;
   }
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg">
+    <div className="p-6 bg-white rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Payment History</h2>
       <table className="table-auto w-full border-collapse border border-gray-300">
         <thead>

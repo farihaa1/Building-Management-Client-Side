@@ -39,8 +39,7 @@ const ManageMembers = () => {
       if (result.isConfirmed) {
         
         axiosSecure.patch("/users/remove-role")
-          .then(res => console.log(res))
-          .catch(err => console.error(err));
+       
         Swal.fire("Removed!", "The member has been removed.", "success");
       }
     });

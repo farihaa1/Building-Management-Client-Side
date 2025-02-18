@@ -42,7 +42,7 @@ const AgreementRequests = () => {
     <div>
       <h1 className="text-2xl font-bold mb-6">Agreement Requests</h1>
       <table className="w-full border">
-        <thead>
+        <thead className="w-full">
           <tr>
             <th className="border p-2">Name</th>
             <th className="border p-2">Email</th>
@@ -58,7 +58,7 @@ const AgreementRequests = () => {
           {requests ? (
             <>
               {requests.map((req) => (
-                <tr key={req._id}>
+                <tr key={req._id} className="w-full">
                   <td className="border p-2">{req.name}</td>
                   <td className="border p-2">{req.email}</td>
                   <td className="border p-2">{req.floorNo}</td>
@@ -85,7 +85,7 @@ const AgreementRequests = () => {
             </>
           ) : (
             <>
-              <p>No Agrement found</p>
+              <p>No Agreement found</p>
             </>
           )}
         </tbody>
