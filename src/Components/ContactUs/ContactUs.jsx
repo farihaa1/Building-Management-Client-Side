@@ -1,8 +1,9 @@
 import React from 'react';
 
+
 const ContactUs = () => {
     return (
-        <div className='flex flex-col gap-2 text-black dark:text-white font-mulish px-4 py-12'>
+        <div className='flex flex-col gap-2 text-black dark:text-white font-mulish px-4 py-12 container mx-auto'>
             <p className='text-primary font-play italic'>Contact Us</p>
             <h3 className='text-4xl lg:text-5xl font-semibold'>GET IN TOUCH</h3>
             <p className="text-gray-600 dark:text-gray-400 pb-5">We will help you find the best available apartments for sale or for rent. Let us know what you are looking for and we will make sure you get it as fast as possible!</p>

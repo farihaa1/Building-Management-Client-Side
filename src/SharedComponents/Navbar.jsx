@@ -19,7 +19,6 @@ const Navbar = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
   const [isMember, isMemberLoading] = useMember();
   const { theme, toggleTheme } = useTheme();
- 
 
   useEffect(() => {
     if (user && !isAdmin && !isMember) {
@@ -62,87 +61,85 @@ const Navbar = () => {
   }
 
   const Links = (
-    <><li>
-    <NavLink
-      to="/"
-      className={({ isActive }) =>
-        `font-semibold text-xl ${
-          isActive
-            ? "font-bold underline text-[1.3rem] transition-all duration-500"
-            : "text-xl"
-        }`
-      }
-    >
-      Home
-    </NavLink>
-  </li>
-  <li>
-    <NavLink
-      to="/apartment"
-      className={({ isActive }) =>
-        `font-semibold text-xl ${
-          isActive
-            ? "font-bold underline text-[1.3rem] transition-all duration-500"
-            : "text-xl"
-        }`
-      }
-    >
-      Apartment
-    </NavLink>
-  </li>
-  <li>
-    <NavHashLink
-      smooth
-      to="/#about"
-      className={({ isActive }) =>
-        `font-semibold text-xl ${
-          isActive
-            ? "font-bold underline text-[1.3rem] transition-all duration-500"
-            : "text-xl"
-        }`
-      }
-    >
-      About
-    </NavHashLink>
-  </li>
-  <li>
-    <NavHashLink
-      smooth
-      to="/#location"
-      className={({ isActive }) =>
-        `font-semibold text-xl ${
-          isActive
-            ? "font-bold underline text-[1.3rem] transition-all duration-500"
-            : "text-xl"
-        }`
-      }
-    >
-      Location
-    </NavHashLink>
-  </li>
-  <li>
-    <NavLink
-      to={
-        isUser
-          ? "/dashboard/user-profile"
-          : isMember
-          ? "/dashboard/member-profile"
-          : "/dashboard/admin-profile"
-      }
-      className={({ isActive }) =>
-        `font-semibold text-xl ${
-          isActive
-            ? "font-bold underline text-[1.3rem] transition-all duration-500"
-            : "text-xl"
-        }`
-      }
-    >
-      Dashboard
-    </NavLink>
-  </li>
+    <>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `font-semibold text-xl ${
+              isActive
+                ? "font-bold underline text-[1.3rem] transition-all duration-500"
+                : "text-xl"
+            }`
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/apartment"
+          className={({ isActive }) =>
+            `font-semibold text-xl ${
+              isActive
+                ? "font-bold underline text-[1.3rem] transition-all duration-500"
+                : "text-xl"
+            }`
+          }
+        >
+          Apartment
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/#about"
+          className={({ isActive }) =>
+            `font-semibold text-xl ${
+              isActive
+                ? "font-bold underline text-[1.3rem] transition-all duration-500"
+                : "text-xl"
+            }`
+          }
+        >
+          About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/#location"
+          className={({ isActive }) =>
+            `font-semibold text-xl ${
+              isActive
+                ? "font-bold underline text-[1.3rem] transition-all duration-500"
+                : "text-xl"
+            }`
+          }
+        >
+          Location
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={
+            isUser
+              ? "/dashboard/user-profile"
+              : isMember
+              ? "/dashboard/member-profile"
+              : "/dashboard/admin-profile"
+          }
+          className={({ isActive }) =>
+            `font-semibold text-xl ${
+              isActive
+                ? "font-bold underline text-[1.3rem] transition-all duration-500"
+                : "text-xl"
+            }`
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
- 
 
   return (
     <motion.div

@@ -89,7 +89,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className="relative mt-16 ">
+    <div className="relative mt-16 w-full">
       <Swiper
         spaceBetween={30}
         speed={500}
@@ -141,7 +141,7 @@ const Banner = () => {
         ))}
       </Swiper>
       {/* Custom Navigation Buttons */}
-      <div ref={navigationPrevRef} className="custom-prev-button">
+      <div ref={navigationPrevRef} className="custom-prev-button absolute">
         <MdOutlineKeyboardArrowLeft></MdOutlineKeyboardArrowLeft>
       </div>
       <div ref={navigationNextRef} className="custom-next-button">

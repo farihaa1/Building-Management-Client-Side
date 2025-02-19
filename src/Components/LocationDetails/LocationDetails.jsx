@@ -15,13 +15,13 @@ const LocationDetails = () => {
         <h2 className="text-5xl md:text-6xl font-bold mb-6 ">
           Our Location
         </h2>
-        <p className="text-sm md:text-lg text-gray-600 dark:text-gray-400 mb-8">
+        <p className="text-sm md:text-lg text-gray-600 dark:text-gray-400 mb-8 font-mulish">
           Harmony Heights is ideally located in the heart of the city, providing
           easy access to all major landmarks and transportation hubs. Whether
           you're arriving by car, public transport, or walking, you’ll find us
           conveniently situated. Below are the directions on how to reach us:
         </p>
-        <div className="flex justify-center gap-8 mb-10">
+        <div className="flex justify-center gap-8 mb-10 font-mulish ">
           <div className="directions-card bg-white p-3 lg:p-6  shadow-lg w-full sm:w-80">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">By Car</h3>
             <p className="text-gray-700 text-sm mb-4">
@@ -54,7 +54,7 @@ const LocationDetails = () => {
             />
           </Map>
         </div>
-        <p className="text-sm sm:text-lg dark:text-gray-300  text-gray-600 text-center leading-relaxed">
+        <p className="text-sm sm:text-lg dark:text-gray-300  text-gray-600 text-center leading-relaxed font-mulish">
           We look forward to welcoming you! If you need further assistance, feel
           free to contact us.
         </p>

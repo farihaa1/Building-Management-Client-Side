@@ -5,6 +5,8 @@ import LocationDetails from "../../Components/LocationDetails/LocationDetails";
 import Coupons from "../Coupons";
 import ContactUs from "../../Components/ContactUs/ContactUs";
 import Newsletter from "./Newsletter";
+import Luxary from "../../Components/Luxary";
+import Faq from "./Faq";
 
 const HomePage = () => {
   return (
@@ -16,9 +18,12 @@ const HomePage = () => {
         <Banner></Banner>
         <AboutUs></AboutUs>
         <LocationDetails></LocationDetails>
+        <Luxary></Luxary>
         <Coupons></Coupons>
         <ContactUs></ContactUs>
+       
         <Newsletter></Newsletter>
+        <Faq></Faq>
       </div>
     </div>
   );
