@@ -86,7 +86,7 @@ const ManageCoupons = () => {
       {isModalOpen && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="absolute z[10] items-center top-20 lg:top-0 right-0 left-0 lg:translate-x-1/2  lg:translate-y-1/2 min-w-28 max-w-60  lg:min-w-96 rounded-lg bg-primaryColor text-white px-6 py-6 flex flex-col gap-4"
+          className="absolute z[10] items-center top-20 lg:top-0 right-0 left-0 lg:translate-x-1/2  lg:translate-y-1/2 min-w-28 max-w-60  lg:min-w-96 bg-primaryColor text-white px-6 py-6 flex flex-col gap-4"
         >
           <h2 className="text-lg font-semibold mb-4 text-center">
             Add New Coupon

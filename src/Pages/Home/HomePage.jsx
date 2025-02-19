@@ -3,6 +3,8 @@ import Banner from "../../Components/Banner/Banner";
 import AboutUs from "../../Components/AboutUs/AboutUs";
 import LocationDetails from "../../Components/LocationDetails/LocationDetails";
 import Coupons from "../Coupons";
+import ContactUs from "../../Components/ContactUs/ContactUs";
+import Newsletter from "./Newsletter";
 
 const HomePage = () => {
   return (
@@ -15,6 +17,8 @@ const HomePage = () => {
         <AboutUs></AboutUs>
         <LocationDetails></LocationDetails>
         <Coupons></Coupons>
+        <ContactUs></ContactUs>
+        <Newsletter></Newsletter>
       </div>
     </div>
   );

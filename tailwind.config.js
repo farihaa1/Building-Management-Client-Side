@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primaryColor: '#DD2D4A',
+        primaryColor: '#0C0F26',
         secondaryColor: '#0C0F26',
-        primary: '#880D1E',
+        primary: '#3FB9BE',
         primaryText: '#CBEEF3',
       },
       fontFamily: {
@@ -17,6 +17,7 @@ export default {
         pSans: ["PT Sans Narrow", "sans-serif"],
         syne: [ "Syne", "sans-serif"],
         play: [ "Playfair Display", "sans-serif"],
+        antonio: [ "Antonio", "sans-serif"],
         mulish: [ "Mulish", "sans-serif"],
       }
       

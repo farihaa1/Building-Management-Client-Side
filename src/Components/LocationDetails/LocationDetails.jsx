@@ -10,19 +10,19 @@ const LocationDetails = () => {
   const color = `hsl(${hue % 360}deg 39% 70%)`;
 
   return (
-    <div className="location-details  bg-gray-100 py-16 px-6 sm:px-12 lg:px-20">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-6">
+    <div id="location" className="location-details text-black dark:text-white py-16 px-6 sm:px-12 lg:px-20 font-pSans  bg-opacity-40">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 ">
           Our Location
         </h2>
-        <p className="text-sm sm:text-xl text-gray-700 leading-relaxed mb-8">
+        <p className="text-sm md:text-lg text-gray-600 dark:text-gray-400 mb-8">
           Harmony Heights is ideally located in the heart of the city, providing
           easy access to all major landmarks and transportation hubs. Whether
           you're arriving by car, public transport, or walking, you’ll find us
           conveniently situated. Below are the directions on how to reach us:
         </p>
         <div className="flex justify-center gap-8 mb-10">
-          <div className="directions-card bg-white p-3 lg:p-6 rounded-lg shadow-lg w-full sm:w-80">
+          <div className="directions-card bg-white p-3 lg:p-6  shadow-lg w-full sm:w-80">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">By Car</h3>
             <p className="text-gray-700 text-sm mb-4">
               Take the downtown exit and continue straight for 2 miles. Turn
@@ -31,7 +31,7 @@ const LocationDetails = () => {
             </p>
            
           </div>
-          <div className="directions-card bg-white p-3 lg:p-6 rounded-lg shadow-lg w-full sm:w-80">
+          <div className="directions-card bg-white p-3 lg:p-6  shadow-lg w-full sm:w-80">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               By Train
             </h3>
@@ -54,7 +54,7 @@ const LocationDetails = () => {
             />
           </Map>
         </div>
-        <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
+        <p className="text-sm sm:text-lg dark:text-gray-300  text-gray-600 text-center leading-relaxed">
           We look forward to welcoming you! If you need further assistance, feel
           free to contact us.
         </p>

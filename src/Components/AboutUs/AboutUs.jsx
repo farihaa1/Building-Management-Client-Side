@@ -1,14 +1,53 @@
-import React from "react";
-
+import React, { useState } from "react";
+import AnimatedNumbers from "react-animated-numbers";
+import bg1 from "../../assets/background/about1.png";
+import bg2 from "../../assets/background/about2.jpg";
+import bg3 from "../../assets/background/bg.jpg";
 
 const AboutUs = () => {
+  const [number, setNumber] = useState(1990);
+
   return (
-    <div className=" text-white py-16 px-6 sm:px-12 lg:px-20">
-      <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-extrabold tracking-tight mb-6">
-          About the Building
+    <div
+      id="about"
+      style={{ backgroundImage: `url(${bg3})` }}
+      className="text-black py-16 px-4 sm:px-12 lg:px-20 font-pSans flex flex-col md:flex-row gap-10 dark:bg-black dark:bg-opacity-80 dark:bg-blend-overlay  dark:text-white"
+    >
+      <div className="md:w-3/5 relative flex justify-center items-center mb-48">
+        <div className="flex -translate-x-16">
+          <img className="w-80 h-96 object-cover " src={bg1} alt="" />
+          <img
+            className="w-80 absolute h-96 object-cover top-1/2 left-1/2"
+            src={bg2}
+            alt=""
+          />
+        </div>
+        <div className="absolute top-0 right-10 font-antonio font-bold">
+          <div >
+            <AnimatedNumbers
+              
+              fontStyle={{
+                fontSize: 50,
+                color: "#3FB9BE",
+              }}
+              transitions={(index) => ({
+               
+                type: "spring",
+                duration: index + 0.9,
+              })}
+              animateToNumber={number}
+            />
+          </div>
+
+          <p className="text-[#4febff]">Built In</p>
+        </div>
+      </div>
+      <div className="md:2/5 mx-auto md:flex md:flex-col md:justify-center">
+        <p className="text-[#3FB9BE] italic text-start">Subtitle</p>
+        <h2 className="text-5xl text-start md:text-6xl font-bold  mb-6">
+          Introducing Our Residence
         </h2>
-        <p className=" text-sm leading-relaxed mb-8 max-w-4xl mx-auto">
+        <p className="text-sm text-gray-600 leading-relaxed max-w-4xl mx-auto">
           Nestled in the heart of the city, Harmony Heights offers an unmatched
           living experience. This architectural masterpiece features
           state-of-the-art amenities, breathtaking views, and an eco-friendly
@@ -17,7 +56,7 @@ const AboutUs = () => {
           call home.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mt-10">
+      {/* <div className="flex gap-8 max-w-7xl mx-auto mt-10">
         <div className="flex flex-col items-center">
           <div className="p-6 rounded-full bg-gray-800 shadow-lg">
             <svg
@@ -30,10 +69,6 @@ const AboutUs = () => {
             </svg>
           </div>
           <h3 className="text-lg font-semibold mt-4">Modern Architecture</h3>
-          <p className="text-center text-sm mt-2">
-            Designed by world-renowned architects, featuring elegant and
-            contemporary designs.
-          </p>
         </div>
         <div className="flex flex-col items-center">
           <div className="p-6 rounded-full bg-gray-800 shadow-lg">
@@ -47,10 +82,6 @@ const AboutUs = () => {
             </svg>
           </div>
           <h3 className="text-lg font-semibold mt-4">Eco-Friendly Design</h3>
-          <p className="text-center text-sm mt-2">
-            Built with sustainability in mind, incorporating green spaces and
-            energy-efficient systems.
-          </p>
         </div>
         <div className="flex flex-col items-center">
           <div className="p-6 rounded-full bg-gray-800 shadow-lg">
@@ -64,12 +95,8 @@ const AboutUs = () => {
             </svg>
           </div>
           <h3 className="text-lg font-semibold mt-4">Premium Amenities</h3>
-          <p className="text-center text-sm mt-2">
-            Enjoy a wide range of facilities, including a gym, pool, and
-            recreational areas for families.
-          </p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

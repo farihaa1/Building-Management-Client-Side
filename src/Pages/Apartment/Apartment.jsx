@@ -82,7 +82,7 @@ const Apartment = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 lg:px-12">
+    <div className="container mx-auto lg:px-12">
       <h2 className="main-heading">Available Apartments</h2>
 
       <div className="flex justify-between items-center mb-6">
@@ -91,14 +91,14 @@ const Apartment = () => {
             type="number"
             placeholder="Min Rent"
             
-            className="input input-bordered w-2/5 px-2 h-10"
+            className="input input-bordered w-2/5 h-10 rounded-none"
             name="min"
           />
           <input
             type="number"
             placeholder="Max Rent"
             
-            className="input input-bordered w-2/5 h-10"
+            className="input input-bordered w-2/5 h-10 rounded-none"
             name="max"
           />
           <button type="submit" className="primary-btn">
@@ -107,16 +107,16 @@ const Apartment = () => {
         </form>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       
         {apartments.map((apartment) => (
-          <div key={apartment._id} className="card shadow-lg">
+          <div key={apartment._id} className="card rounded-none dark:bg-white/85 shadow-lg">
             <img
               src={apartment.image}
               alt={`Apartment ${apartment.apartmentNo}`}
               className="w-full h-48 object-cover"
             />
-            <div className="card-body text-sm">
+            <div className="card-body  text-sm">
               <h3 className="primary-heading">
                 Apartment {apartment.apartmentNo}
               </h3>
@@ -124,7 +124,7 @@ const Apartment = () => {
               <p>Block: {apartment.blockName}</p>
               <p>Rent: ${apartment.rent}</p>
               <button
-                className=" primary-btn"
+                className="primary-btn"
                 onClick={() => handleApply(apartment)}
               >
                 Apply Now

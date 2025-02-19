@@ -9,6 +9,7 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const navigationPrevRef = useRef(null);
@@ -22,7 +23,7 @@ const Banner = () => {
         "Experience the ultimate luxurious living in the heart of the city, surrounded by convenience and style.",
       callToAction: {
         text: "Explore Apartments",
-        link: "/apartments",
+        link: "/apartment",
       },
       image: {
         src: "https://i.ibb.co.com/7VJpkFx/d09208183125ab47493d5de2f8710b6faa27d7cc-3000x2000.jpg",
@@ -78,7 +79,7 @@ const Banner = () => {
         "Live, work, and play in perfect harmony at an urban oasis designed for a modern lifestyle.",
       callToAction: {
         text: "Discover More",
-        link: "/discover",
+        link: "/Contact",
       },
       image: {
         src: "https://i.ibb.co.com/dQWxGV6/thon-residence-eu-apartment-011.jpg",
@@ -88,7 +89,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className="relative ">
+    <div className="relative mt-16 ">
       <Swiper
         spaceBetween={30}
         speed={500}
@@ -122,16 +123,18 @@ const Banner = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 width: "full",
-                height: "450px",
+                height: "550px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                padding:"10px"
               }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-50"></div>
               <div className="banner-content relative z-10 text-center text-white">
                 <h1 className="heading">{item.heading}</h1>
-                <p className="para">{item.title}</p>
+                <p className="para mb-6 text-primary/90 italic">{item.title}</p>
+                <Link  to={item.callToAction.link} className="bg-primary px-4 py-2 text-lg ">{item.callToAction.text}</Link>
               </div>
             </div>
           </SwiperSlide>

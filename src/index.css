@@ -1,21 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Syne:wght@400..800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=PT+Sans+Narrow:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Syne:wght@400..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
     .primary-btn {
-      @apply bg-primaryColor rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
+      @apply bg-primaryColor px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
     }
     .danger-btn {
-      @apply bg-red-600 rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
+      @apply bg-red-600 px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
     }
     .primary-btn1 {
-      @apply text-black rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl  my-2;
+      @apply bg-primaryColor/50  text-white  px-4 py-2 lg:px-5 lg:py-3 shadow-xl  my-2;
     }
     .primary-btn2 {
-      @apply bg-green-700 rounded-lg px-4 py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
+      @apply bg-primary  px-4  py-2 lg:px-5 lg:py-3 shadow-xl text-white my-2;
     }
     .primary-heading{
         @apply text-xl md:text-2xl font-bold text-green-950
@@ -24,10 +23,10 @@
         @apply text-3xl font-bold text-green-950 my-5
     }
     .heading{
-      @apply text-[2.3rem] lg:text-6xl font-bold pt-2 pb-1 font-syne
+      @apply text-[2.3rem] lg:text-5xl font-bold pt-2 pb-1 font-syne
     }
     .para{
-      @apply text-xs lg:text-sm text-gray-300
+      @apply text-sm lg:text-lg text-gray-300
     }
     .custom-prev-button{
       @apply text-4xl text-gray-300 shadow-md rounded-full
@@ -35,4 +34,5 @@
     .custom-next-button{
       @apply text-4xl text-gray-300 shadow-md rounded-full
     }
+   
   }

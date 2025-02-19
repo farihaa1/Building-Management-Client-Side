@@ -9,6 +9,7 @@ import useAdmin from "../Hooks/useAdmin";
 import useMember from "../Hooks/useMember";
 import useAuth from "../Hooks/useAuth";
 import { useTheme } from "../Providers/ThemeContext";
+import { HashLink, NavHashLink } from 'react-router-hash-link';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -61,55 +62,84 @@ const Navbar = () => {
   }
 
   const Links = (
-    <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `font-semibold text-xl ${
-              isActive
-                ? "font-bold underline text-[1.3rem] transition-all duration-500"
-                : "text-xl"
-            }`
-          }
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/apartment"
-          className={({ isActive }) =>
-            `font-semibold text-xl ${
-              isActive
-                ? "font-bold underline text-[1.3rem] transition-all duration-500 "
-                : "text-xl"
-            }`
-          }
-        >
-          Apartment
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={
-            isUser
-              ? "/dashboard/user-profile"
-              : isMember
-              ? "/dashboard/member-profile"
-              : "/dashboard/admin-profile"
-          }
-          className={({ isActive }) =>
-            `font-semibold text-xl ${
-              isActive
-                ? "font-bold underline text-[1.3rem] transition-all duration-500 "
-                : "text-xl"
-            }`
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+    <><li>
+    <NavLink
+      to="/"
+      className={({ isActive }) =>
+        `font-semibold text-xl ${
+          isActive
+            ? "font-bold underline text-[1.3rem] transition-all duration-500"
+            : "text-xl"
+        }`
+      }
+    >
+      Home
+    </NavLink>
+  </li>
+  <li>
+    <NavLink
+      to="/apartment"
+      className={({ isActive }) =>
+        `font-semibold text-xl ${
+          isActive
+            ? "font-bold underline text-[1.3rem] transition-all duration-500"
+            : "text-xl"
+        }`
+      }
+    >
+      Apartment
+    </NavLink>
+  </li>
+  <li>
+    <NavHashLink
+      smooth
+      to="/#about"
+      className={({ isActive }) =>
+        `font-semibold text-xl ${
+          isActive
+            ? "font-bold underline text-[1.3rem] transition-all duration-500"
+            : "text-xl"
+        }`
+      }
+    >
+      About
+    </NavHashLink>
+  </li>
+  <li>
+    <NavHashLink
+      smooth
+      to="/#location"
+      className={({ isActive }) =>
+        `font-semibold text-xl ${
+          isActive
+            ? "font-bold underline text-[1.3rem] transition-all duration-500"
+            : "text-xl"
+        }`
+      }
+    >
+      Location
+    </NavHashLink>
+  </li>
+  <li>
+    <NavLink
+      to={
+        isUser
+          ? "/dashboard/user-profile"
+          : isMember
+          ? "/dashboard/member-profile"
+          : "/dashboard/admin-profile"
+      }
+      className={({ isActive }) =>
+        `font-semibold text-xl ${
+          isActive
+            ? "font-bold underline text-[1.3rem] transition-all duration-500"
+            : "text-xl"
+        }`
+      }
+    >
+      Dashboard
+    </NavLink>
+  </li>
     </>
   );
  
@@ -118,7 +148,7 @@ const Navbar = () => {
     <motion.div
       animate={{ y: [-100, 0] }}
       transition={{ duration: 0.8 }}
-      className="text-white font-mulish z-[100] py-1 lg:px-10 bg-primary shadow-lg"
+      className="text-white fixed top-0 w-full font-mulish z-[100] py-1 lg:px-10 bg-primary shadow-2xl"
     >
       <div className="navbar lg:container mx-auto">
         {/* Navbar Start */}
@@ -133,7 +163,7 @@ const Navbar = () => {
             </div>
             {/* Mobile Menu */}
             {isMenuOpen && (
-              <ul className="bg-primaryColor z-[50] pt-[4.2rem] w-40 transition-all ease-linear duration-200  px-2 shadow space-y-3 py-6 left-0 top-0 min-h-screen fixed menu-dropdown">
+              <ul className="bg-primary shadow-2xl z-[50] pt-[4.2rem] w-40 transition-all ease-linear duration-200  px-2 space-y-3 py-6 left-0 top-0 min-h-screen fixed menu-dropdown">
                 <li onClick={toggleMenu} className="cursor-pointer pb-3">
                   <ImCross className="w-5 h-5" />
                 </li>
