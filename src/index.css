@@ -24,12 +24,15 @@
         @apply text-3xl font-bold text-green-950 my-5
     }
     .heading{
-      @apply text-xl lg:text-6xl font-bold pt-2 pb-1 font-syne
+      @apply text-[2.3rem] lg:text-6xl font-bold pt-2 pb-1 font-syne
     }
     .para{
       @apply text-xs lg:text-sm text-gray-300
     }
     .custom-prev-button{
-      @apply text-4xl text-gray-300
+      @apply text-4xl text-gray-300 shadow-md rounded-full
+    }
+    .custom-next-button{
+      @apply text-4xl text-gray-300 shadow-md rounded-full
     }
   }

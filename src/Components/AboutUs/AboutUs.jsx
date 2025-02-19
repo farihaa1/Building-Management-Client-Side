@@ -3,7 +3,7 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <div className="about-building bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-6 sm:px-12 lg:px-20">
+    <div className=" text-white py-16 px-6 sm:px-12 lg:px-20">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-3xl font-extrabold tracking-tight mb-6">
           About the Building
@@ -30,7 +30,7 @@ const AboutUs = () => {
             </svg>
           </div>
           <h3 className="text-lg font-semibold mt-4">Modern Architecture</h3>
-          <p className="text-center text-sm mt-2 text-gray-300">
+          <p className="text-center text-sm mt-2">
             Designed by world-renowned architects, featuring elegant and
             contemporary designs.
           </p>
@@ -47,7 +47,7 @@ const AboutUs = () => {
             </svg>
           </div>
           <h3 className="text-lg font-semibold mt-4">Eco-Friendly Design</h3>
-          <p className="text-center text-sm mt-2 text-gray-300">
+          <p className="text-center text-sm mt-2">
             Built with sustainability in mind, incorporating green spaces and
             energy-efficient systems.
           </p>
@@ -64,7 +64,7 @@ const AboutUs = () => {
             </svg>
           </div>
           <h3 className="text-lg font-semibold mt-4">Premium Amenities</h3>
-          <p className="text-center text-sm mt-2 text-gray-300">
+          <p className="text-center text-sm mt-2">
             Enjoy a wide range of facilities, including a gym, pool, and
             recreational areas for families.
           </p>

@@ -35,8 +35,8 @@ const Banner = () => {
       title:
         "Discover modern apartments with premium amenities designed for your comfort and lifestyle needs.",
       callToAction: {
-        text: "View Details",
-        link: "/details",
+        text: "About us",
+        link: "#about",
       },
       image: {
         src: "https://i.ibb.co.com/LdcPDbG/apartments-1-1080x720.jpg",
@@ -49,8 +49,8 @@ const Banner = () => {
       title:
         "Enjoy the perfect blend of sophistication and comfort in a modern apartment overlooking the city skyline.",
       callToAction: {
-        text: "See Availability",
-        link: "/availability",
+        text: "Location",
+        link: "#location",
       },
       image: {
         src: "https://i.ibb.co.com/tz9ktT2/ois-12.jpg",
@@ -64,7 +64,7 @@ const Banner = () => {
         "Explore elegant apartments designed for every lifestyle, offering luxury at an affordable price.",
       callToAction: {
         text: "Find Your Space",
-        link: "/find",
+        link: "/apartment",
       },
       image: {
         src: "https://lakehouseapartmentsorlando.com/assets/images/cache/rotator_2_lake_house_2199-2ffd901585d09181c1f97015ab672bc8.jpg",
@@ -88,7 +88,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <Swiper
         spaceBetween={30}
         speed={500}
