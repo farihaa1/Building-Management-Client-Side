@@ -59,7 +59,6 @@ const Navbar = () => {
   if (loading || isAdminLoading || isMemberLoading) {
     return <Loader />;
   }
-
   const Links = (
     <>
       <li>
