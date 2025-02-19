@@ -55,7 +55,7 @@ const ManageMembers = () => {
   const membersArray = Array.isArray(members) ? members : [];
 
   return (
-    <div>
+    <div className="font-mulish">
       <h1 className="text-2xl font-bold mb-6">Manage Members</h1>
       {membersArray.length === 0 ? (
         <div>No members available</div>

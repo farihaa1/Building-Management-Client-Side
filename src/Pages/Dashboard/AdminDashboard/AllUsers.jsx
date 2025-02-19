@@ -101,7 +101,7 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full font-mulish">
       <div className="flex justify-evenly my-4 w-full">
         <h2 className="text-3xl">All Users</h2>
         <h2 className="text-3xl">Total Users: {users.length}</h2>

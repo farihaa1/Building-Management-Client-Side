@@ -82,7 +82,7 @@ const ManageCoupons = () => {
   
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative font-mulish">
       {isModalOpen && (
         <form
           onSubmit={handleSubmit(onSubmit)}

@@ -26,7 +26,7 @@ const PaymentInfo = () => {
   );
 
   return (
-    <div className="">
+    <div className=" font-mulish">
       <h1 className="text-2xl font-bold my-4">Apply Coupon</h1>
       <Elements stripe={stripePromise}>
         <CheckoutForm filterCoupon={filterCoupon}></CheckoutForm>

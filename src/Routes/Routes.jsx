@@ -21,6 +21,7 @@ import AdminRoutes from "./AdminRoutes";
 import UserProfile from "../Pages/Dashboard/UserDashboard/UserProfile";
 import MemberRoutes from "./MemberRoutes";
 import PaymentInfo from "../Pages/Dashboard/MemberDashboard/PaymentInfo";
+import Overview from "../Pages/Overview/Overview";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +54,11 @@ const Routes = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
+
+      {
+        path: "overview",
+        element: <Overview></Overview>,
+      },
       {
         path: "user-profile",
         element: <UserProfile></UserProfile>,

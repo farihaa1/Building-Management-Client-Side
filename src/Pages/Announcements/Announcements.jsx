@@ -17,13 +17,13 @@ const Announcements = () => {
   if (isError) return <p>Failed to load announcements.</p>;
 
   return (
-    <div className=" lg:p-4 text-xs text-black">
+    <div className=" lg:p-4 text-xs text-black font-mulish">
       <div className="pt-3 lg:pt-12">
-        <h3 className="text-lg lg:text-3xl font-bold text-gray-700">Announcements</h3>
+        <h3 className=" font-bold text-gray-700 dark:text-gray-400 text-4xl lg:text-5xl">Announcements</h3>
         <div className="grid grid-cols-2 w-full gap-3 lg:gap-6 pt-3 lg:pt-8 ">
           {announcements.map((item) => (
-            <div key={item._id} className="card w-full bg-green-200 text-green-950">
-              <div className="card-body p-3">
+            <div key={item._id} className="card w-full bg-primary/50 rounded-none">
+              <div className="card-body p-2 lg:p-4">
                 <h4 className="font-semibold text-[13px] sm:text-sm lg:text-xl">{item.title}</h4>
                 <p className="text-[10px] py-1">{item.description}</p>
                 <div className="card-actions">

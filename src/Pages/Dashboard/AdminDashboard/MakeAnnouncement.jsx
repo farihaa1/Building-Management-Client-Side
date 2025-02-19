@@ -30,7 +30,7 @@ const MakeAnnouncement = () => {
   };
 
   return (
-    <div>
+    <div className="font-mulish">
       <h1 className="text-2xl font-bold mb-6">Make Announcement</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">

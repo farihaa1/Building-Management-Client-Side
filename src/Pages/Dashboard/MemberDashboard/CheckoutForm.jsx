@@ -120,7 +120,7 @@ const CheckoutForm = ({ filterCoupon }) => {
   };
 
   return (
-    <form className="max-w-xl flex flex-col gap-3" onSubmit={handleSubmit}>
+    <form className="max-w-xl flex flex-col gap-3 font-mulish" onSubmit={handleSubmit}>
       <div className="mt-4 w-full flex gap-4">
         {filterCoupon ? (
           <>

@@ -41,7 +41,7 @@ const MakePayment = () => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg">
+    <div className="p-6 bg-white font-mulish shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold my-4">Apartment Info</h1>
       <form className="flex flex-col gap-3">
         <input

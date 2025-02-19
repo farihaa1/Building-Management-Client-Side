@@ -39,7 +39,7 @@ const AgreementRequests = () => {
   }
 
   return (
-    <div>
+    <div className="font-mulish">
       <h1 className="text-2xl font-bold mb-6">Agreement Requests</h1>
       <table className="w-full border">
         <thead className="w-full">

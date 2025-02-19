@@ -40,11 +40,11 @@ const AdminProfile = () => {
   }
 
   return (
-    <div>
+    <div className="font-mulish">
       <h1 className="text-2xl font-bold mb-6">Admin Profile</h1>
       <div className="flex gap-6 items-center mb-6">
         <img
-          src={adminInfo?.photoURL}
+          src={user?.photoURL}
           alt="Admin"
           className="w-24 h-24 rounded-full"
         />

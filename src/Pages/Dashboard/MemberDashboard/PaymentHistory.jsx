@@ -30,7 +30,7 @@ const PaymentHistory = () => {
   }
 
   return (
-    <div className="p-6 bg-white rounded-lg">
+    <div className="p-6 bg-white rounded-lg font-mulish">
       <h2 className="text-2xl font-semibold mb-4">Payment History</h2>
       <table className="table-auto w-full border-collapse border border-gray-300">
         <thead>
